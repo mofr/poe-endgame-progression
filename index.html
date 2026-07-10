@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Path of Exile — Endgame Progression Layout</title>
+  <style>
+    :root {
+      --bg: #0a0d12;
+      --bg2: #0f141c;
+      --panel: rgba(18, 24, 33, 0.95);
+      --panel2: rgba(13, 17, 24, 0.96);
+      --line: rgba(212, 195, 154, 0.18);
+      --line2: rgba(212, 195, 154, 0.10);
+      --text: #ebe2d1;
+      --muted: #b7ad9a;
+      --gold: #c8a864;
+      --c-exarch: #d96e47;
+      --c-eater: #62c4e8;
+      --c-maven: #c59dfd;
+      --c-shaper: #aa87ff;
+      --c-elder: #7ab56f;
+      --c-sirus: #ca4d4d;
+      --c-memory: #52d5c7;
+      --c-nightmare: #8fb5da;
+      --c-synthesis: #84a9e4;
+      --c-league: #b8a687;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: #06080c;
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body {
+      min-width: calc(2048px + 32px);
+      overflow-x: auto;
+      display: grid;
+      place-items: start center;
+      padding: 16px;
+    }
+
+    .frame {
+      width: 2048px;
+      max-width: none;
+    }
+
+    .note {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(200, 168, 100, 0.22);
+      background: rgba(13, 17, 24, 0.9);
+      color: #d4cbba;
+      font: 14px/1.4 system-ui, sans-serif;
+    }
+
+    .poster {
+      position: relative;
+      width: 100%;
+      min-height: 2700px;
+      padding: 38px 38px 28px;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(90, 112, 148, 0.14), transparent 28%),
+        radial-gradient(circle at 18% 18%, rgba(101, 78, 41, 0.08), transparent 26%),
+        linear-gradient(180deg, #0b1017 0%, #0a0d12 42%, #090b10 100%);
+      border: 1px solid rgba(200, 168, 100, 0.22);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+    }
+
+    .poster::before,
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(200, 168, 100, 0.08);
+      pointer-events: none;
+    }
+    .poster::after {
+      inset: 160px 24px 24px;
+      border-style: dashed;
+      border-color: rgba(200, 168, 100, 0.06);
+    }
+
+    .header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .title {
+      margin: 0;
+      font-size: 58px;
+      line-height: 1;
+      letter-spacing: 0.07em;
+      color: #f4ead5;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      margin: 10px 0 0;
+      font-size: 19px;
+      letter-spacing: 0.28em;
+      color: #baa36f;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 24px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ebdfbf;
+    }
+    .section-caption {
+      margin: -4px 0 18px;
+      color: #aa9f8d;
+      font: 14px/1.35 system-ui, sans-serif;
+    }
+
+    .boss-section { position: relative; z-index: 1; }
+    .boss-crown {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    .boss-col, .boss-wide {
+      position: relative;
+      min-height: 100%;
+      padding: 12px 8px 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(18, 24, 33, 0.78), rgba(11, 15, 21, 0.78));
+      border: 1px solid rgba(212, 195, 154, 0.10);
+    }
+    .boss-col::before, .boss-wide::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      width: 1px;
+      height: 8px;
+      background: rgba(212, 195, 154, 0.18);
+      transform: translateX(-50%);
+    }
+
+    .span-1 { grid-column: span 1; }
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+
+    .branch-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 6px 14px 7px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      background: rgba(5, 8, 12, 0.7);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 auto 12px;
+      color: inherit;
+    }
+
+    .chain {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .node {
+      position: relative;
+      padding: 11px 12px 10px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(26, 33, 44, 0.96), rgba(14, 18, 24, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      min-height: 58px;
+    }
+    .node + .node::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 1.5px;
+      height: 10px;
+      background: rgba(212, 195, 154, 0.24);
+      transform: translateX(-50%);
+    }
+
+    .node.entry { background: linear-gradient(180deg, rgba(24, 30, 39, 0.95), rgba(14, 18, 24, 0.95)); }
+    .node.final {
+      border-width: 2px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 0 18px rgba(200, 168, 100, 0.08);
+    }
+
+    .node-title {
+      font-size: 19px;
+      line-height: 1.08;
+      font-weight: 700;
+      color: #f3ead7;
+      text-align: center;
+    }
+    .boss-col .node-title, .boss-wide .node-title { font-size: 16px; }
+    .node-sub {
+      margin-top: 4px;
+      color: #cac0ad;
+      font: 13px/1.22 system-ui, sans-serif;
+      text-align: center;
+    }
+    .small-list {
+      margin: 6px 0 0;
+      padding: 0;
+      list-style: none;
+      color: #cabfae;
+      font: 12px/1.22 system-ui, sans-serif;
+      text-align: center;
+    }
+    .small-list li + li { margin-top: 2px; }
+    .boss-col > .chain {
+      min-height: 520px;
+      justify-content: space-between;
+    }
+    .pair-grid .chain, .tri-grid .chain {
+      min-height: 390px;
+      justify-content: space-between;
+    }
+    .merge-box .chain {
+      min-height: 196px;
+      justify-content: space-between;
+    }
+    .boss-section .small-list { display: none; }
+
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 7px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 19px;
+      padding: 1px 7px 2px;
+      border-radius: 999px;
+      border: 1px solid rgba(218, 198, 140, 0.7);
+      background: rgba(67, 52, 19, 0.4);
+      color: #f0dd9e;
+      font: 700 11px/1 system-ui, sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .color-synthesis { color: var(--c-synthesis); }
+    .color-exarch { color: var(--c-exarch); }
+    .color-shaper { color: var(--c-shaper); }
+    .color-elder { color: var(--c-elder); }
+    .color-maven { color: var(--c-maven); }
+    .color-sirus { color: var(--c-sirus); }
+    .color-eater { color: var(--c-eater); }
+    .color-memory { color: var(--c-memory); }
+    .color-nightmare { color: var(--c-nightmare); }
+
+    .pair-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .merge-box {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(212, 195, 154, 0.14);
+    }
+
+    .tri-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mechanics-section { position: relative; z-index: 1; margin-top: 12px; }
+    .mechanics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .mech-card {
+      padding: 12px 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(212, 195, 154, 0.12);
+      background: linear-gradient(180deg, rgba(17, 23, 31, 0.92), rgba(12, 16, 22, 0.92));
+      min-height: 204px;
+    }
+
+    .mech-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(184, 166, 135, 0.32);
+      background: rgba(5, 8, 12, 0.55);
+      color: #ece2cd;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .segment-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .segment {
+      position: relative;
+      padding: 9px 10px 8px;
+      border-radius: 12px;
+      background: rgba(26, 33, 44, 0.95);
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    .segment + .segment::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      width: 1.5px;
+      height: 8px;
+      background: rgba(212, 195, 154, 0.20);
+      transform: translateX(-50%);
+    }
+    .segment.final {
+      border-width: 2px;
+      border-color: rgba(200, 168, 100, 0.38);
+      background: rgba(32, 36, 45, 0.95);
+    }
+    .segment-title {
+      font-size: 15px;
+      line-height: 1.12;
+      font-weight: 700;
+      color: #f3ead7;
+    }
+    .segment-sub {
+      margin-top: 3px;
+      color: #c7bcaa;
+      font: 12px/1.22 system-ui, sans-serif;
+    }
+
+    .minor-panel {
+      padding: 14px 16px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(212, 195, 154, 0.14);
+      background: linear-gradient(180deg, rgba(15, 20, 27, 0.92), rgba(11, 15, 20, 0.92));
+    }
+    .minor-title {
+      margin: 0 0 10px;
+      font-size: 21px;
+      letter-spacing: 0.07em;
+      color: #eddfbd;
+      text-transform: uppercase;
+    }
+    .minor-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px 10px;
+    }
+    .minor-chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 195, 154, 0.12);
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+      color: #d5cab4;
+      font: 13px/1.2 system-ui, sans-serif;
+      white-space: nowrap;
+    }
+
+    .footnote {
+      margin-top: 10px;
+      color: rgba(208, 201, 185, 0.62);
+      font: 12px/1.3 system-ui, sans-serif;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="note">
+      Generated from <code>spec.yaml</code>. Fixed 2048px working canvas; narrow browser windows scroll horizontally instead of collapsing the crown.
+    </div>
+    <div class="poster">
+      <header class="header">
+        <h1 class="title">Path of Exile</h1>
+        <div class="subtitle">Endgame Progression</div>
+      </header>
+
+      <section class="boss-section">
+        <h2 class="section-title">Atlas / Pinnacle Boss Crown</h2>
+        <div class="section-caption">Top-first structure. Boss branches stay prominent; dense special cases (Shaper/Elder and Memory Threads) get dedicated composite blocks instead of being forced into the same generic column.</div>
+        <div id="bossCrown" class="boss-crown"></div>
+      </section>
+
+      <section class="mechanics-section">
+        <h2 class="section-title">League & System Progression</h2>
+        <div class="section-caption">Compact progression segments below the crown. This structure is ready for future icon cues: catalysts from Ultimatum, oils from Blight, Timeless Jewels from Legion, etc.</div>
+        <div id="mechanicsGrid" class="mechanics-grid"></div>
+      </section>
+
+      <section class="minor-panel">
+        <h3 class="minor-title">Minor / Resource Mechanics</h3>
+        <div id="minorGrid" class="minor-grid"></div>
+        <div class="footnote">Not shown as active core branches: Harbinger, Metamorph, Prophecy, Perandus, Crucible, Necropolis, Trial of the Ancestors, old Synthesis league mechanic, Mirage league branch.</div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const DATA = {
+  "bossCrown": [
+    {
+      "type": "branch",
+      "span": 1,
+      "color": "synthesis",
+      "label": "Synthesis",
+      "stages": [
+        {
+          "title": "Synthesis Maps"
+        },
+        {
+          "title": "Cortex"
+        },
+        {
+          "title": "Venarius"
+        },
+        {
+          "title": "Uber Cortex / Uber Venarius",
+          "final": true
+        }
+      ]
+    },
+    {
+      "type": "branch",
+      "span": 1,
+      "color": "exarch",
+      "label": "Exarch",
+      "stages": [
+        {
+          "title": "Exarch influence"
+        },
+        {
+          "title": "The Black Star"
+        },
+        {
+          "title": "The Searing Exarch",
+          "badges": [
+            "Voidstone"
+          ]
+        },
+        {
+          "title": "Uber Exarch",
+          "final": true
+        }
+      ]
+    },
+    {
+      "type": "branch",
+      "span": 1,
+      "color": "eater",
+      "label": "Eater",
+      "stages": [
+        {
+          "title": "Eater influence"
+        },
+        {
+          "title": "The Infinite Hunger"
+        },
+        {
+          "title": "The Eater of Worlds",
+          "badges": [
+            "Voidstone"
+          ]
+        },
+        {
+          "title": "Uber Eater",
+          "final": true
+        }
+      ]
+    },
+    {
+      "type": "branch",
+      "span": 1,
+      "color": "maven",
+      "label": "Maven",
+      "stages": [
+        {
+          "title": "Maven witnessing"
+        },
+        {
+          "title": "Maven Invitations"
+        },
+        {
+          "title": "The Maven",
+          "badges": [
+            "Voidstone"
+          ]
+        },
+        {
+          "title": "Uber Maven",
+          "final": true
+        }
+      ]
+    },
+    {
+      "type": "composite",
+      "span": 3,
+      "color": "shaper",
+      "label": "Shaper / Elder Cluster",
+      "leftLabel": "Shaper",
+      "rightLabel": "Elder",
+      "leftStages": [
+        {
+          "title": "Shaper Guardians"
+        },
+        {
+          "title": "The Shaper"
+        },
+        {
+          "title": "Uber Shaper",
+          "final": true
+        }
+      ],
+      "rightStages": [
+        {
+          "title": "Elder Guardians"
+        },
+        {
+          "title": "The Elder"
+        }
+      ],
+      "mergeStages": [
+        {
+          "title": "The Shaper + The Elder"
+        },
+        {
+          "title": "Uber Elder",
+          "badges": [
+            "Voidstone"
+          ]
+        },
+        {
+          "title": "Uber Elder",
+          "final": true
+        }
+      ]
+    },
+    {
+      "type": "branch",
+      "span": 1,
+      "color": "sirus",
+      "label": "Sirus",
+      "stages": [
+        {
+          "title": "Conquerors"
+        },
+        {
+          "title": "Sirus, Awakener of Worlds"
+        },
+        {
+          "title": "Uber Sirus",
+          "final": true
+        }
+      ]
+    },
+    {
+      "type": "composite3",
+      "span": 3,
+      "color": "memory",
+      "label": "Memory Threads",
+      "entry": {
+        "title": "Memory Threads"
+      },
+      "cols": [
+        {
+          "label": "Loneliness",
+          "stages": [
+            {
+              "title": "Memory of Loneliness"
+            },
+            {
+              "title": "The Neglected Flame"
+            },
+            {
+              "title": "Incarnation of Neglect"
+            },
+            {
+              "title": "Uber Neglect",
+              "final": true
+            }
+          ]
+        },
+        {
+          "label": "Trauma",
+          "stages": [
+            {
+              "title": "Memory of Trauma"
+            },
+            {
+              "title": "The Cardinal of Fear"
+            },
+            {
+              "title": "Incarnation of Fear"
+            },
+            {
+              "title": "Uber Fear",
+              "final": true
+            }
+          ]
+        },
+        {
+          "label": "Reverence",
+          "stages": [
+            {
+              "title": "Memory of Reverence"
+            },
+            {
+              "title": "The Deceitful God"
+            },
+            {
+              "title": "Incarnation of Dread",
+              "badges": [
+                "Originator Voidstone"
+              ]
+            },
+            {
+              "title": "Uber Dread",
+              "final": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "branch",
+      "span": 1,
+      "color": "nightmare",
+      "label": "Nightmare Maps",
+      "stages": [
+        {
+          "title": "Nightmare Maps"
+        },
+        {
+          "title": "Nightmare bosses"
+        },
+        {
+          "title": "Uber pinnacle fragments"
+        },
+        {
+          "title": "Uber boss access",
+          "final": true,
+          "badges": [
+            "Atlas Points",
+            "Exceptional Supports"
+          ]
+        }
+      ]
+    }
+  ],
+  "mechanics": [
+    {
+      "label": "Sanctum",
+      "stages": [
+        {
+          "title": "Forbidden Tomes"
+        },
+        {
+          "title": "Sanctum"
+        },
+        {
+          "title": "Lycia, Herald of the Scourge"
+        },
+        {
+          "title": "Full Sanctum / mastery",
+          "final": true,
+          "badges": [
+            "No-hit"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Delirium",
+      "stages": [
+        {
+          "title": "Mirrors of Delirium"
+        },
+        {
+          "title": "Simulacrum Splinters"
+        },
+        {
+          "title": "Simulacrum",
+          "sub": "Omniphobia · Kosis"
+        },
+        {
+          "title": "Full wave clear",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Delve",
+      "stages": [
+        {
+          "title": "Niko / Sulphite"
+        },
+        {
+          "title": "Azurite Mine",
+          "sub": "Ahuatotli · Kurgal · Aul"
+        },
+        {
+          "title": "Deep Delve",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Heist",
+      "stages": [
+        {
+          "title": "Contracts"
+        },
+        {
+          "title": "Rogue Harbour"
+        },
+        {
+          "title": "Blueprints / Grand Heists",
+          "sub": "Twins · Unbreakable"
+        },
+        {
+          "title": "Curio Rewards",
+          "final": true,
+          "badges": [
+            "Replicas",
+            "Experimented Bases"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Expedition",
+      "stages": [
+        {
+          "title": "Expedition encounters"
+        },
+        {
+          "title": "Logbooks",
+          "sub": "Olroth · Uhtred · Vorana · Medved"
+        },
+        {
+          "title": "Vendor Economy",
+          "sub": "Rog · Tujen · Dannig · Gwennen"
+        },
+        {
+          "title": "Logbook mastery",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Harvest",
+      "stages": [
+        {
+          "title": "Sacred Grove"
+        },
+        {
+          "title": "Lifeforce"
+        },
+        {
+          "title": "Oshabi, Avatar of the Grove"
+        },
+        {
+          "title": "Harvest crafting",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Betrayal",
+      "stages": [
+        {
+          "title": "Jun / Syndicate"
+        },
+        {
+          "title": "Safehouses"
+        },
+        {
+          "title": "Catarina, Master of Undeath"
+        },
+        {
+          "title": "Veiled crafting / rewards",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Incursion",
+      "stages": [
+        {
+          "title": "Alva missions"
+        },
+        {
+          "title": "Temple of Atzoatl"
+        },
+        {
+          "title": "Omnitect"
+        },
+        {
+          "title": "Temple rewards",
+          "final": true,
+          "badges": [
+            "Double Corrupt"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Bestiary",
+      "stages": [
+        {
+          "title": "Einhar / Beasts"
+        },
+        {
+          "title": "Menagerie"
+        },
+        {
+          "title": "Beastcrafting",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Abyss",
+      "stages": [
+        {
+          "title": "Abysses"
+        },
+        {
+          "title": "Abyssal Depths",
+          "sub": "Amanamu · Ulaman"
+        },
+        {
+          "title": "Abyss rewards",
+          "final": true,
+          "badges": [
+            "Abyss Jewels",
+            "Stygian Vise"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Beyond",
+      "stages": [
+        {
+          "title": "Beyond demons",
+          "sub": "K’tash · Ghorr · Beidat"
+        },
+        {
+          "title": "Tainted currency",
+          "final": true,
+          "badges": [
+            "Tainted"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Blight",
+      "stages": [
+        {
+          "title": "Blight encounters"
+        },
+        {
+          "title": "Blighted Maps"
+        },
+        {
+          "title": "Blight-Ravaged Maps"
+        },
+        {
+          "title": "Blight rewards",
+          "final": true,
+          "badges": [
+            "Oils",
+            "Anointments"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Breach / Keepers",
+      "stages": [
+        {
+          "title": "Breaches / Keepers"
+        },
+        {
+          "title": "Breachlords / Wombgifts / Hiveblood"
+        },
+        {
+          "title": "Breach rewards",
+          "final": true,
+          "badges": [
+            "Genesis Tree",
+            "Foulborn"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Legion",
+      "stages": [
+        {
+          "title": "Timeless Monoliths"
+        },
+        {
+          "title": "Timeless Emblems"
+        },
+        {
+          "title": "Timeless Conflict",
+          "final": true,
+          "badges": [
+            "Timeless Jewel"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ritual",
+      "stages": [
+        {
+          "title": "Ritual Altars"
+        },
+        {
+          "title": "Tribute / vessels / corpses"
+        },
+        {
+          "title": "An Audience with the King"
+        },
+        {
+          "title": "The King in the Mists",
+          "final": true
+        }
+      ]
+    },
+    {
+      "label": "Ultimatum",
+      "stages": [
+        {
+          "title": "Ultimatum encounters"
+        },
+        {
+          "title": "Inscribed Ultimatums"
+        },
+        {
+          "title": "The Trialmaster",
+          "final": true,
+          "badges": [
+            "Catalysts"
+          ]
+        }
+      ]
+    }
+  ],
+  "minor": [
+    "Essence",
+    "Strongboxes",
+    "Shrines",
+    "Rogue Exiles",
+    "Tormented Spirits",
+    "Warbands",
+    "Affliction",
+    "Nameless Seer",
+    "Reflecting Mist",
+    "Sentinel",
+    "Kingsmarch / Tattoos"
+  ]
+};
+    const bossCrown = document.getElementById('bossCrown');
+    const mechanicsGrid = document.getElementById('mechanicsGrid');
+    const minorGrid = document.getElementById('minorGrid');
+
+    function makeNode(stage, cls = 'node') {
+      const div = document.createElement('div');
+      div.className = `${cls}${stage.final ? ' final' : ''}${stage.entry ? ' entry' : ''}`;
+      div.innerHTML = `<div class="${cls === 'segment' ? 'segment-title' : 'node-title'}">${stage.title}</div>`;
+      if (stage.sub) {
+        const sub = document.createElement('div');
+        sub.className = cls === 'segment' ? 'segment-sub' : 'node-sub';
+        sub.textContent = stage.sub;
+        div.appendChild(sub);
+      }
+      if (stage.list) {
+        const ul = document.createElement('ul');
+        ul.className = 'small-list';
+        stage.list.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+        div.appendChild(ul);
+      }
+      if (stage.badges) {
+        const badges = document.createElement('div');
+        badges.className = 'badges';
+        stage.badges.forEach(text => {
+          const badge = document.createElement('span');
+          badge.className = 'badge';
+          badge.textContent = text;
+          badges.appendChild(badge);
+        });
+        div.appendChild(badges);
+      }
+      return div;
+    }
+
+    function makeBranchTag(text, colorClass) {
+      const tag = document.createElement('div');
+      tag.className = `branch-tag color-${colorClass}`;
+      tag.textContent = text;
+      return tag;
+    }
+
+    function makeChain(stages, nodeClass = 'node') {
+      const chain = document.createElement('div');
+      chain.className = nodeClass === 'segment' ? 'segment-chain' : 'chain';
+      stages.forEach((stage, i) => {
+        const node = makeNode({ ...stage, entry: i === 0 && nodeClass === 'node' }, nodeClass);
+        if (i === 0 && nodeClass === 'node') node.classList.add('entry');
+        chain.appendChild(node);
+      });
+      return chain;
+    }
+
+    DATA.bossCrown.forEach(branch => {
+      const wrap = document.createElement('div');
+      wrap.className = `${branch.type === 'branch' ? 'boss-col' : 'boss-wide'} span-${branch.span || 1} color-${branch.color}`;
+      wrap.appendChild(makeBranchTag(branch.label, branch.color));
+
+      if (branch.type === 'branch') {
+        wrap.appendChild(makeChain(branch.stages));
+      }
+
+      if (branch.type === 'composite') {
+        const pair = document.createElement('div');
+        pair.className = 'pair-grid';
+
+        const left = document.createElement('div');
+        left.appendChild(makeBranchTag(branch.leftLabel, branch.color));
+        left.appendChild(makeChain(branch.leftStages));
+
+        const right = document.createElement('div');
+        right.className = 'color-elder';
+        right.appendChild(makeBranchTag(branch.rightLabel, 'elder'));
+        right.appendChild(makeChain(branch.rightStages));
+
+        pair.appendChild(left);
+        pair.appendChild(right);
+        wrap.appendChild(pair);
+
+        const merge = document.createElement('div');
+        merge.className = 'merge-box';
+        merge.appendChild(makeChain(branch.mergeStages));
+        wrap.appendChild(merge);
+      }
+
+      if (branch.type === 'composite3') {
+        wrap.appendChild(makeChain([branch.entry]));
+        const tri = document.createElement('div');
+        tri.className = 'tri-grid';
+        branch.cols.forEach(col => {
+          const colDiv = document.createElement('div');
+          colDiv.appendChild(makeBranchTag(col.label, branch.color));
+          colDiv.appendChild(makeChain(col.stages));
+          tri.appendChild(colDiv);
+        });
+        wrap.appendChild(tri);
+      }
+
+      bossCrown.appendChild(wrap);
+    });
+
+    DATA.mechanics.forEach(mech => {
+      const card = document.createElement('div');
+      card.className = 'mech-card';
+      const head = document.createElement('div');
+      head.className = 'mech-head';
+      head.textContent = mech.label;
+      card.appendChild(head);
+      card.appendChild(makeChain(mech.stages, 'segment'));
+      mechanicsGrid.appendChild(card);
+    });
+
+    DATA.minor.forEach(item => {
+      const chip = document.createElement('div');
+      chip.className = 'minor-chip';
+      chip.textContent = item;
+      minorGrid.appendChild(chip);
+    });
+  </script>
+</body>
+</html>
