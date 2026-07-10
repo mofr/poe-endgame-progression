@@ -1,0 +1,278 @@
+# Path of Exile endgame poster specification
+#
+# Edit this file when a new league changes progression, bosses, or rewards.
+# `stages` are ordered from early progression to the final endpoint.
+# Use `badges` for rewards that will later become icons.
+# Keep boss-crown detail concise; put granular rewards in mechanic badges/icons.
+
+layout:
+  poster_width: 2048
+  poster_min_height: 2700
+  crown_columns: 12
+content:
+  bossCrown:
+  - type: branch
+    span: 1
+    color: synthesis
+    label: Synthesis
+    stages:
+    - title: Synthesis Maps
+    - title: Cortex
+    - title: Venarius
+    - title: Uber Cortex / Uber Venarius
+      final: true
+  - type: branch
+    span: 1
+    color: exarch
+    label: Exarch
+    stages:
+    - title: Exarch influence
+    - title: The Black Star
+    - title: The Searing Exarch
+      badges:
+      - Voidstone
+    - title: Uber Exarch
+      final: true
+  - type: branch
+    span: 1
+    color: eater
+    label: Eater
+    stages:
+    - title: Eater influence
+    - title: The Infinite Hunger
+    - title: The Eater of Worlds
+      badges:
+      - Voidstone
+    - title: Uber Eater
+      final: true
+  - type: branch
+    span: 1
+    color: maven
+    label: Maven
+    stages:
+    - title: Maven witnessing
+    - title: Maven Invitations
+    - title: The Maven
+      badges:
+      - Voidstone
+    - title: Uber Maven
+      final: true
+  - type: composite
+    span: 3
+    color: shaper
+    label: Shaper / Elder Cluster
+    leftLabel: Shaper
+    rightLabel: Elder
+    leftStages:
+    - title: Shaper Guardians
+    - title: The Shaper
+    - title: Uber Shaper
+      final: true
+    rightStages:
+    - title: Elder Guardians
+    - title: The Elder
+    mergeStages:
+    - title: The Shaper + The Elder
+    - title: Uber Elder
+      badges:
+      - Voidstone
+    - title: Uber Elder
+      final: true
+  - type: branch
+    span: 1
+    color: sirus
+    label: Sirus
+    stages:
+    - title: Conquerors
+    - title: Sirus, Awakener of Worlds
+    - title: Uber Sirus
+      final: true
+  - type: composite3
+    span: 3
+    color: memory
+    label: Memory Threads
+    entry:
+      title: Memory Threads
+    cols:
+    - label: Loneliness
+      stages:
+      - title: Memory of Loneliness
+      - title: The Neglected Flame
+      - title: Incarnation of Neglect
+      - title: Uber Neglect
+        final: true
+    - label: Trauma
+      stages:
+      - title: Memory of Trauma
+      - title: The Cardinal of Fear
+      - title: Incarnation of Fear
+      - title: Uber Fear
+        final: true
+    - label: Reverence
+      stages:
+      - title: Memory of Reverence
+      - title: The Deceitful God
+      - title: Incarnation of Dread
+        badges:
+        - Originator Voidstone
+      - title: Uber Dread
+        final: true
+  - type: branch
+    span: 1
+    color: nightmare
+    label: Nightmare Maps
+    stages:
+    - title: Nightmare Maps
+    - title: Nightmare bosses
+    - title: Uber pinnacle fragments
+    - title: Uber boss access
+      final: true
+      badges:
+      - Atlas Points
+      - Exceptional Supports
+  mechanics:
+  - label: Sanctum
+    stages:
+    - title: Forbidden Tomes
+    - title: Sanctum
+    - title: Lycia, Herald of the Scourge
+    - title: Full Sanctum / mastery
+      final: true
+      badges:
+      - No-hit
+  - label: Delirium
+    stages:
+    - title: Mirrors of Delirium
+    - title: Simulacrum Splinters
+    - title: Simulacrum
+      sub: Omniphobia · Kosis
+    - title: Full wave clear
+      final: true
+  - label: Delve
+    stages:
+    - title: Niko / Sulphite
+    - title: Azurite Mine
+      sub: Ahuatotli · Kurgal · Aul
+    - title: Deep Delve
+      final: true
+  - label: Heist
+    stages:
+    - title: Contracts
+    - title: Rogue Harbour
+    - title: Blueprints / Grand Heists
+      sub: Twins · Unbreakable
+    - title: Curio Rewards
+      final: true
+      badges:
+      - Replicas
+      - Experimented Bases
+  - label: Expedition
+    stages:
+    - title: Expedition encounters
+    - title: Logbooks
+      sub: Olroth · Uhtred · Vorana · Medved
+    - title: Vendor Economy
+      sub: Rog · Tujen · Dannig · Gwennen
+    - title: Logbook mastery
+      final: true
+  - label: Harvest
+    stages:
+    - title: Sacred Grove
+    - title: Lifeforce
+    - title: Oshabi, Avatar of the Grove
+    - title: Harvest crafting
+      final: true
+  - label: Betrayal
+    stages:
+    - title: Jun / Syndicate
+    - title: Safehouses
+    - title: Catarina, Master of Undeath
+    - title: Veiled crafting / rewards
+      final: true
+  - label: Incursion
+    stages:
+    - title: Alva missions
+    - title: Temple of Atzoatl
+    - title: Omnitect
+    - title: Temple rewards
+      final: true
+      badges:
+      - Double Corrupt
+  - label: Bestiary
+    stages:
+    - title: Einhar / Beasts
+    - title: Menagerie
+    - title: Beastcrafting
+      final: true
+  - label: Abyss
+    stages:
+    - title: Abysses
+    - title: Abyssal Depths
+      sub: Amanamu · Ulaman
+    - title: Abyss rewards
+      final: true
+      badges:
+      - Abyss Jewels
+      - Stygian Vise
+  - label: Beyond
+    stages:
+    - title: Beyond demons
+      sub: K’tash · Ghorr · Beidat
+    - title: Tainted currency
+      final: true
+      badges:
+      - Tainted
+  - label: Blight
+    stages:
+    - title: Blight encounters
+    - title: Blighted Maps
+    - title: Blight-Ravaged Maps
+    - title: Blight rewards
+      final: true
+      badges:
+      - Oils
+      - Anointments
+  - label: Breach / Keepers
+    stages:
+    - title: Breaches / Keepers
+    - title: Breachlords / Wombgifts / Hiveblood
+    - title: Breach rewards
+      final: true
+      badges:
+      - Genesis Tree
+      - Foulborn
+  - label: Legion
+    stages:
+    - title: Timeless Monoliths
+    - title: Timeless Emblems
+    - title: Timeless Conflict
+      final: true
+      badges:
+      - Timeless Jewel
+  - label: Ritual
+    stages:
+    - title: Ritual Altars
+    - title: Tribute / vessels / corpses
+    - title: An Audience with the King
+    - title: The King in the Mists
+      final: true
+  - label: Ultimatum
+    stages:
+    - title: Ultimatum encounters
+    - title: Inscribed Ultimatums
+    - title: The Trialmaster
+      final: true
+      badges:
+      - Catalysts
+  minor:
+  - Essence
+  - Strongboxes
+  - Shrines
+  - Rogue Exiles
+  - Tormented Spirits
+  - Warbands
+  - Affliction
+  - Nameless Seer
+  - Reflecting Mist
+  - Sentinel
+  - Kingsmarch / Tattoos
