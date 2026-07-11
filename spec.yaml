@@ -109,49 +109,6 @@ content:
       - label: Eclipse Support
         icon: https://www.poewiki.net/wiki/Special:FilePath/Eclipse_Support_inventory_icon.png
       final: true
-  - type: composite
-    span: 2
-    color: shaper
-    label: Shaper / Elder
-    art: shaper-elder.jpg
-    artPos: calc(50% - 8px) -75px
-    leftLabel: Shaper
-    rightLabel: Elder
-    leftStages:
-    - title: Shaper<br>Guardians
-    - title: The Shaper
-      badges:
-      - label: Decayed Voidstone
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Decayed_Voidstone_inventory_icon.png
-      - label: Shaper's Touch
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Shaper%27s_Touch_inventory_icon.png
-    - title: Uber Shaper
-      badges:
-      - label: Echoes of Creation
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Echoes_of_Creation_inventory_icon.png
-      final: true
-    rightStages:
-    - title: Elder<br>Guardians
-    - title: The Elder
-      badges:
-      - label: Decayed Voidstone
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Decayed_Voidstone_inventory_icon.png
-      - label: Watcher's Eye (2-mod)
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Watcher%27s_Eye_inventory_icon.png
-    - title: Uber Elder (duo)
-      badges:
-      - label: Watcher's Eye (3-mod)
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Watcher%27s_Eye_inventory_icon.png
-    mergeStages:
-    - title: Uber Uber Elder
-      badges:
-      - label: Sublime Vision
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Sublime_Vision_inventory_icon.png
-      - label: Call of the Void
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Call_of_the_Void_inventory_icon.png
-      - label: Voidforge
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Voidforge_inventory_icon.png
-      final: true
   - type: composite3
     span: 3
     color: memory
@@ -201,6 +158,49 @@ content:
           icon: https://www.poewiki.net/wiki/Special:FilePath/Originator_Voidstone_inventory_icon.png
       - title: Uber Dread
         final: true
+  - type: composite
+    span: 2
+    color: shaper
+    label: Shaper / Elder
+    art: shaper-elder.jpg
+    artPos: calc(50% - 8px) -75px
+    leftLabel: Shaper
+    rightLabel: Elder
+    leftStages:
+    - title: Shaper<br>Guardians
+    - title: The Shaper
+      badges:
+      - label: Decayed Voidstone
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Decayed_Voidstone_inventory_icon.png
+      - label: Shaper's Touch
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Shaper%27s_Touch_inventory_icon.png
+    - title: Uber Shaper
+      badges:
+      - label: Echoes of Creation
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Echoes_of_Creation_inventory_icon.png
+      final: true
+    rightStages:
+    - title: Elder<br>Guardians
+    - title: The Elder
+      badges:
+      - label: Decayed Voidstone
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Decayed_Voidstone_inventory_icon.png
+      - label: Watcher's Eye (2-mod)
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Watcher%27s_Eye_inventory_icon.png
+    - title: Uber Elder (duo)
+      badges:
+      - label: Watcher's Eye (3-mod)
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Watcher%27s_Eye_inventory_icon.png
+    mergeStages:
+    - title: Uber Uber Elder
+      badges:
+      - label: Sublime Vision
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Sublime_Vision_inventory_icon.png
+      - label: Call of the Void
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Call_of_the_Void_inventory_icon.png
+      - label: Voidforge
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Voidforge_inventory_icon.png
+      final: true
   - type: branch
     span: 1
     color: sirus
