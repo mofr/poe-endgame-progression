@@ -6,7 +6,8 @@
 # Branch/mechanic backdrops: `art` (file in assets/art), plus optional knobs:
 #   artPos (CSS background-position, offset), artSize (background-size, scale),
 #   artDim (0 = raw art .. 1 = default darkening), artBlend (e.g. multiply).
-# `headerArt` on a mechanic replaces its header pill with a logo image.
+# `headerArt` on a mechanic replaces its header pill with a logo image;
+#   add `headerArtBlend: screen` only for exports with a baked black background.
 # Keep boss-crown detail concise; put granular rewards in mechanic badges/icons.
 
 layout:
@@ -33,7 +34,6 @@ content:
         - label: Orb of Remembrance
           icon: https://www.poewiki.net/wiki/Special:FilePath/Orb_of_Remembrance_inventory_icon.png
       - title: Uber Neglect
-        final: true
     - label: Trauma
       stages:
       - title: Memory of Trauma
@@ -47,7 +47,6 @@ content:
         - label: Enmity's Embrace
           icon: https://www.poewiki.net/wiki/Special:FilePath/Enmity%27s_Embrace_inventory_icon.png
       - title: Uber Fear
-        final: true
     - label: Reverence
       stages:
       - title: Memory of Reverence
@@ -63,7 +62,6 @@ content:
         - label: Originator Voidstone
           icon: https://www.poewiki.net/wiki/Special:FilePath/Originator_Voidstone_inventory_icon.png
       - title: Uber Dread
-        final: true
   - type: branch
     span: 1
     color: maven
@@ -92,7 +90,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Awakened_Enlighten_Support_inventory_icon.png
       - label: Eclipse Support
         icon: https://www.poewiki.net/wiki/Special:FilePath/Eclipse_Support_inventory_icon.png
-      final: true
   - type: branch
     span: 1
     color: exarch
@@ -115,7 +112,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Annihilation%27s_Approach_inventory_icon.png
       - label: Melding of the Flesh
         icon: https://www.poewiki.net/wiki/Special:FilePath/Melding_of_the_Flesh_inventory_icon.png
-      final: true
   - type: branch
     span: 1
     color: nightmare
@@ -127,7 +123,6 @@ content:
     - title: Yellow Maps
     - title: Red Maps
     - title: Nightmare Maps
-      final: true
       badges:
       - label: Uber Fragments
         icon: https://www.poewiki.net/wiki/Special:FilePath/Awakening_Fragment_inventory_icon.png
@@ -157,7 +152,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Ashes_of_the_Stars_inventory_icon.png
       - label: Nimis
         icon: https://www.poewiki.net/wiki/Special:FilePath/Nimis_inventory_icon.png
-      final: true
   - type: composite
     span: 2
     color: shaper
@@ -179,7 +173,6 @@ content:
       badges:
       - label: Echoes of Creation
         icon: https://www.poewiki.net/wiki/Special:FilePath/Echoes_of_Creation_inventory_icon.png
-      final: true
     rightStages:
     - title: Elder<br>Guardians
     - title: The Elder
@@ -201,7 +194,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Call_of_the_Void_inventory_icon.png
       - label: Voidforge
         icon: https://www.poewiki.net/wiki/Special:FilePath/Voidforge_inventory_icon.png
-      final: true
   - type: branch
     span: 1
     color: sirus
@@ -231,7 +223,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Oriath%27s_End_inventory_icon.png
       - label: Thread of Hope (Massive)
         icon: https://www.poewiki.net/wiki/Special:FilePath/Thread_of_Hope_inventory_icon.png
-      final: true
   - type: branch
     span: 1
     color: synthesis
@@ -257,17 +248,17 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Rational_Doctrine_inventory_icon.png
       - label: The Apostate
         icon: https://www.poewiki.net/wiki/Special:FilePath/The_Apostate_inventory_icon.png
-      final: true
   mechanics:
   - label: Sanctum
     color: sanctum
+    headerArt: sanctum-header.png
     stages:
     - title: Forbidden Tomes
     - title: Sanctum
     - title: Lycia, Herald of the Scourge
-      final: true
   - label: Delirium
     art: delirium.png
+    headerArt: delirium-header.png
     color: delirium
     stages:
     - title: Mirrors of Delirium
@@ -287,7 +278,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Megalomaniac_inventory_icon.png
       - label: Voices
         icon: https://www.poewiki.net/wiki/Special:FilePath/Voices_inventory_icon.png
-      final: true
   - label: Delve
     art: delve.png
     color: delve
@@ -296,13 +286,11 @@ content:
     - title: Azurite Mine
       sub: Ahuatotli · Kurgal · Aul
     - title: Deep Delve
-      final: true
   - label: Heist
     color: heist
     stages:
     - title: Contracts
     - title: Blueprints / Grand Heists
-      final: true
       badges:
       - label: Replicas
         icon: https://www.poewiki.net/wiki/Special:FilePath/Replica_Headhunter_inventory_icon.png
@@ -311,37 +299,46 @@ content:
       - label: Trarthan Gems
         icon: https://www.poewiki.net/wiki/Special:FilePath/Prime_Regrading_Lens_inventory_icon.png
   - label: Expedition
-    headerArt: header-expedition.png
+    headerArt: expedition-header.png
+    headerArtBlend: screen  # RGB export with baked black plate
     color: expedition
+    art: expedition.jpg
     stages:
     - title: Expedition encounters
     - title: Logbooks
       sub: Olroth · Uhtred · Vorana · Medved
     - title: Vendor Economy
       sub: Rog · Tujen · Dannig · Gwennen
-      final: true
   - label: Harvest
     color: harvest
+    headerArt: harvest-header.png
     stages:
     - title: Sacred Grove
       badges:
-      - label: Lifeforce
+      - label: Vivid Lifeforce
         icon: https://www.poewiki.net/wiki/Special:FilePath/Vivid_Crystallised_Lifeforce_inventory_icon.png
+      - label: Wild Lifeforce
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Wild_Crystallised_Lifeforce_inventory_icon.png
+      - title: Primal Lifeforce
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Primal_Crystallised_Lifeforce_inventory_icon.png
     - title: Oshabi, Avatar of the Grove
       badges:
       - label: Sacred Lifeforce
         icon: https://www.poewiki.net/wiki/Special:FilePath/Sacred_Crystallised_Lifeforce_inventory_icon.png
-      final: true
+      - label: Forbidden Shako
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Forbidden_Shako_inventory_icon.png
   - label: Betrayal
     color: betrayal
     stages:
     - title: Jun / Syndicate
+      sub: Transportation · Fortification · Research · Intervention
     - title: Safehouses
     - title: Catarina, Master of Undeath
       badges:
-      - label: Veiled currency
+      - label: Veiled Chaos Orb
         icon: https://www.poewiki.net/wiki/Special:FilePath/Veiled_Chaos_Orb_inventory_icon.png
-      final: true
+      - label: Veiled Exalted Orb
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Veiled_Exalted_Orb_inventory_icon.png
   - label: Incursion
     color: incursion
     stages:
@@ -351,16 +348,15 @@ content:
       - label: Double Corrupt
         icon: https://www.poewiki.net/wiki/Special:FilePath/Vaal_Orb_inventory_icon.png
     - title: Omnitect
-      final: true
   - label: Bestiary
-    headerArt: header-bestiary.png
+    headerArt: bestiary-header.png
     color: bestiary
     stages:
     - title: Einhar / Beasts
     - title: Spirit Beasts
-      final: true
   - label: Abyss
     art: abyss.jpg
+    headerArt: abyss-header.png
     color: abyss
     stages:
     - title: Abysses
@@ -371,7 +367,6 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Stygian_Vise_inventory_icon.png
     - title: Abyssal Depths
       sub: Amanamu · Ulaman
-      final: true
   - label: Beyond
     color: beyond
     stages:
@@ -380,29 +375,40 @@ content:
       badges: 
       - label: Tainted currency
         icon: https://www.poewiki.net/wiki/Special:FilePath/Tainted_Chaos_Orb_inventory_icon.png
-      final: true
   - label: Blight
     art: blight-2.png
-    headerArt: header-blight.jpg
+    artPos: center -60px
+    headerArt: blight-header.jpg
     color: blight
     stages:
-    - title: Blight encounters
+    - title: Blight Encounters
+      badges:
+      - label: Sepia Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Sepia_Oil_inventory_icon.png
+      - label: Teal Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Teal_Oil_inventory_icon.png
+      - label: Azure Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Azure_Oil_inventory_icon.png
     - title: Blighted Maps
       badges:
-      - label: Oils
-        icon: https://www.poewiki.net/wiki/Special:FilePath/Golden_Oil_inventory_icon.png
+      - label: Opalescent Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Opalescent_Oil_inventory_icon.png
+      - label: Silver Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Silver_Oil_inventory_icon.png
     - title: Blight-Ravaged Maps
-      final: true
       badges:
-      - label: Rare Oils
+      - label: Golden Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Golden_Oil_inventory_icon.png
+      - label: Tainted Oil
         icon: https://www.poewiki.net/wiki/Special:FilePath/Tainted_Oil_inventory_icon.png
+      - label: Prismatic Oil
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Prismatic_Oil_inventory_icon.png
   - label: Breach / Keepers
     art: breach-2.png
     color: breach
     stages:
     - title: Breaches
     - title: Breachlords
-      final: true
       badges:
       - Genesis Tree
       - Foulborn
@@ -411,7 +417,6 @@ content:
     stages:
     - title: Timeless Monoliths
     - title: Timeless Conflict
-      final: true
       badges:
       - label: Timeless Jewels
         icon: https://www.poewiki.net/wiki/Special:FilePath/Glorious_Vanity_inventory_icon.png
@@ -424,7 +429,6 @@ content:
       - label: Corpses
         icon: https://www.poewiki.net/wiki/Special:FilePath/Filled_Coffin_inventory_icon.png
     - title: The King in the Mists
-      final: true
   - label: Ultimatum
     color: ultimatum
     stages:
@@ -435,7 +439,6 @@ content:
       - label: Inscribed Ultimatums
         icon: https://www.poewiki.net/wiki/Special:FilePath/Inscribed_Ultimatum_inventory_icon.png
     - title: The Trialmaster
-      final: true
   minor:
   - Essence
   - Strongboxes

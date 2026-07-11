@@ -44,7 +44,6 @@ Edit only `spec.yaml` for most changes:
 
 - reorder or rename stages;
 - add/remove bosses;
-- change `final: true`;
 - add rewards to `badges`;
 - move a branch in the crown by reordering entries in `bossCrown`
   (keep the `span` values summing to `layout.crown_columns`);
