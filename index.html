@@ -135,6 +135,7 @@
       display: grid;
       grid-template-columns: repeat(11, minmax(0, 1fr));
       gap: 14px;
+      margin-top: 62px;
       margin-bottom: 28px;
     }
 
@@ -171,31 +172,29 @@
     .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
 
+    /* Column title floats above the panel frame. */
     .branch-tag {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      padding: 6px 14px 7px;
-      border-radius: 999px;
-      border: 1px solid currentColor;
-      background: rgba(5, 8, 12, 0.7);
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin: 0 auto 12px;
-      color: inherit;
-    }
-    .branch-tag::after {
-      content: "";
       position: absolute;
-      top: calc(100% + 7px);
+      top: -44px;
       left: 50%;
       transform: translateX(-50%);
-      width: 150%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212, 195, 154, 0.4), transparent);
+      white-space: nowrap;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: inherit;
+      filter:
+        drop-shadow(0 1px 2px rgba(0, 0, 0, 1))
+        drop-shadow(0 0 8px rgba(0, 0, 0, 0.9));
+    }
+    .branch-tag span {
+      background: linear-gradient(180deg,
+        color-mix(in srgb, currentColor 50%, #ffffff) 10%,
+        color-mix(in srgb, currentColor 95%, #ffffff) 85%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      /* keeps `color` (and thus currentColor above) intact, unlike color: transparent */
+      -webkit-text-fill-color: transparent;
     }
 
     .chain {
@@ -510,7 +509,6 @@
       </header>
 
       <section class="boss-section">
-        <h2 class="section-title">Atlas / Pinnacle Boss Crown</h2>
         <div id="bossCrown" class="boss-crown"></div>
       </section>
 
@@ -712,91 +710,6 @@
       ]
     },
     {
-      "type": "composite",
-      "span": 2,
-      "color": "shaper",
-      "label": "Shaper / Elder",
-      "art": "shaper-elder.jpg",
-      "artPos": "calc(50% - 8px) -75px",
-      "leftLabel": "Shaper",
-      "rightLabel": "Elder",
-      "leftStages": [
-        {
-          "title": "Shaper<br>Guardians"
-        },
-        {
-          "title": "The Shaper",
-          "badges": [
-            {
-              "label": "Decayed Voidstone",
-              "icon": "icons/decayed-voidstone.png"
-            },
-            {
-              "label": "Shaper's Touch",
-              "icon": "icons/shaper-s-touch.png"
-            }
-          ]
-        },
-        {
-          "title": "Uber Shaper",
-          "badges": [
-            {
-              "label": "Echoes of Creation",
-              "icon": "icons/echoes-of-creation.png"
-            }
-          ],
-          "final": true
-        }
-      ],
-      "rightStages": [
-        {
-          "title": "Elder<br>Guardians"
-        },
-        {
-          "title": "The Elder",
-          "badges": [
-            {
-              "label": "Decayed Voidstone",
-              "icon": "icons/decayed-voidstone.png"
-            },
-            {
-              "label": "Watcher's Eye (2-mod)",
-              "icon": "icons/watcher-s-eye.png"
-            }
-          ]
-        },
-        {
-          "title": "Uber Elder (duo)",
-          "badges": [
-            {
-              "label": "Watcher's Eye (3-mod)",
-              "icon": "icons/watcher-s-eye.png"
-            }
-          ]
-        }
-      ],
-      "mergeStages": [
-        {
-          "title": "Uber Uber Elder",
-          "badges": [
-            {
-              "label": "Sublime Vision",
-              "icon": "icons/sublime-vision.png"
-            },
-            {
-              "label": "Call of the Void",
-              "icon": "icons/call-of-the-void.png"
-            },
-            {
-              "label": "Voidforge",
-              "icon": "icons/voidforge.png"
-            }
-          ],
-          "final": true
-        }
-      ]
-    },
-    {
       "type": "composite3",
       "span": 3,
       "color": "memory",
@@ -899,6 +812,91 @@
               "final": true
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "composite",
+      "span": 2,
+      "color": "shaper",
+      "label": "Shaper / Elder",
+      "art": "shaper-elder.jpg",
+      "artPos": "calc(50% - 8px) -75px",
+      "leftLabel": "Shaper",
+      "rightLabel": "Elder",
+      "leftStages": [
+        {
+          "title": "Shaper<br>Guardians"
+        },
+        {
+          "title": "The Shaper",
+          "badges": [
+            {
+              "label": "Decayed Voidstone",
+              "icon": "icons/decayed-voidstone.png"
+            },
+            {
+              "label": "Shaper's Touch",
+              "icon": "icons/shaper-s-touch.png"
+            }
+          ]
+        },
+        {
+          "title": "Uber Shaper",
+          "badges": [
+            {
+              "label": "Echoes of Creation",
+              "icon": "icons/echoes-of-creation.png"
+            }
+          ],
+          "final": true
+        }
+      ],
+      "rightStages": [
+        {
+          "title": "Elder<br>Guardians"
+        },
+        {
+          "title": "The Elder",
+          "badges": [
+            {
+              "label": "Decayed Voidstone",
+              "icon": "icons/decayed-voidstone.png"
+            },
+            {
+              "label": "Watcher's Eye (2-mod)",
+              "icon": "icons/watcher-s-eye.png"
+            }
+          ]
+        },
+        {
+          "title": "Uber Elder (duo)",
+          "badges": [
+            {
+              "label": "Watcher's Eye (3-mod)",
+              "icon": "icons/watcher-s-eye.png"
+            }
+          ]
+        }
+      ],
+      "mergeStages": [
+        {
+          "title": "Uber Uber Elder",
+          "badges": [
+            {
+              "label": "Sublime Vision",
+              "icon": "icons/sublime-vision.png"
+            },
+            {
+              "label": "Call of the Void",
+              "icon": "icons/call-of-the-void.png"
+            },
+            {
+              "label": "Voidforge",
+              "icon": "icons/voidforge.png"
+            }
+          ],
+          "final": true
         }
       ]
     },
@@ -1447,7 +1445,9 @@
     function makeBranchTag(text, colorClass) {
       const tag = document.createElement('div');
       tag.className = `branch-tag color-${colorClass}`;
-      tag.textContent = text;
+      const span = document.createElement('span');
+      span.textContent = text;
+      tag.appendChild(span);
       return tag;
     }
 
@@ -1471,9 +1471,7 @@
       const wrap = document.createElement('div');
       wrap.className = `${branch.type === 'branch' ? 'boss-col' : 'boss-wide'} span-${branch.span || 1} color-${branch.color}`;
       applyArt(wrap, branch);
-      if (branch.type === 'branch') {
-        wrap.appendChild(makeBranchTag(branch.label, branch.color));
-      }
+      wrap.appendChild(makeBranchTag(branch.label, branch.color));
 
       if (branch.type === 'branch') {
         wrap.appendChild(makeChain(branch.stages));
@@ -1484,12 +1482,10 @@
         pair.className = 'pair-grid';
 
         const left = document.createElement('div');
-        left.appendChild(makeBranchTag(branch.leftLabel, branch.color));
         left.appendChild(makeChain(branch.leftStages));
 
         const right = document.createElement('div');
         right.className = 'color-elder';
-        right.appendChild(makeBranchTag(branch.rightLabel, 'elder'));
         right.appendChild(makeChain(branch.rightStages));
 
         pair.appendChild(left);
@@ -1508,7 +1504,6 @@
         tri.className = 'tri-grid';
         branch.cols.forEach(col => {
           const colDiv = document.createElement('div');
-          colDiv.appendChild(makeBranchTag(col.label, branch.color));
           colDiv.appendChild(makeChain(col.stages));
           tri.appendChild(colDiv);
         });
