@@ -80,7 +80,7 @@
       position: relative;
       width: 100%;
       min-height: 2700px;
-      padding: 38px 38px 28px;
+      padding: 58px 38px 28px;
       background:
         radial-gradient(circle at 50% 8%, rgba(90, 112, 148, 0.14), transparent 28%),
         radial-gradient(circle at 18% 18%, rgba(101, 78, 41, 0.08), transparent 26%),
@@ -110,18 +110,66 @@
       text-align: center;
       margin-bottom: 28px;
     }
+    .title-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    .title-ornament::before, .title-ornament::after {
+      content: "";
+      height: 1px;
+      width: 280px;
+      background: linear-gradient(90deg, transparent, rgba(200, 168, 100, 0.5));
+    }
+    .title-ornament::after {
+      background: linear-gradient(270deg, transparent, rgba(200, 168, 100, 0.5));
+    }
+    .title-ornament span {
+      width: 9px;
+      height: 9px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, #f3e5bf, #a8853f);
+      box-shadow: 0 0 12px rgba(200, 168, 100, 0.55);
+    }
+
     .title {
       margin: 0;
-      font-size: 58px;
+      font-size: 88px;
       line-height: 1;
-      letter-spacing: 0.07em;
-      color: #f4ead5;
+      letter-spacing: 0.11em;
+      text-indent: 0.11em;
+      filter:
+        drop-shadow(0 2px 3px rgba(0, 0, 0, 0.9))
+        drop-shadow(0 0 30px rgba(200, 168, 100, 0.35));
+    }
+    .title span {
+      background: linear-gradient(180deg, #fdf9ec 12%, #ecd9a4 55%, #b28f4e 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .subtitle {
-      margin: 10px 0 0;
-      font-size: 19px;
-      letter-spacing: 0.28em;
-      color: #baa36f;
+      margin: 14px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 20px;
+      letter-spacing: 0.34em;
+      text-indent: 0.34em;
+      color: #c9ae74;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+    .subtitle::before, .subtitle::after {
+      content: "";
+      height: 1px;
+      width: 180px;
+      background: linear-gradient(90deg, transparent, rgba(200, 168, 100, 0.55));
+    }
+    .subtitle::after {
+      background: linear-gradient(270deg, transparent, rgba(200, 168, 100, 0.55));
     }
 
     .section-title {
@@ -129,13 +177,14 @@
       font-size: 24px;
       letter-spacing: 0.12em;
       color: #ebdfbf;
+      text-align: center;
     }
     .boss-section { position: relative; z-index: 1; }
     .boss-crown {
       display: grid;
       grid-template-columns: repeat(11, minmax(0, 1fr));
       gap: 14px;
-      margin-top: 62px;
+      margin-top: 74px;
       margin-bottom: 28px;
     }
 
@@ -161,10 +210,6 @@
       background-blend-mode: normal, var(--art-blend, normal), normal;
       border-color: color-mix(in srgb, currentColor 26%, transparent);
       box-shadow: inset 0 0 34px rgba(4, 8, 12, 0.45), 0 0 22px color-mix(in srgb, currentColor 10%, transparent);
-    }
-    .has-art .segment {
-      background: linear-gradient(180deg, rgba(19, 26, 35, 0.90), rgba(10, 15, 21, 0.90));
-      border-color: color-mix(in srgb, currentColor 14%, transparent);
     }
 
     .span-1 { grid-column: span 1; }
@@ -230,18 +275,13 @@
         drop-shadow(0 0 18px rgba(0, 0, 0, 0.8));
     }
     /* Inline span + box-decoration-break: clone restarts the gradient on every line. */
-    .node-title span {
-      background: linear-gradient(180deg, #f7efd9 25%, #d9c088 90%);
+    .node-title span, .segment-title span {
+      background: linear-gradient(180deg, #ffffff 15%, #ecd9a4 90%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
-    }
-    .node.final .node-title span {
-      background: linear-gradient(180deg, #ffffff 15%, #ecd9a4 90%);
-      -webkit-background-clip: text;
-      background-clip: text;
     }
     .boss-col .node-title, .boss-wide .node-title { font-size: 16px; }
     .node-sub {
@@ -429,38 +469,41 @@
       height: 48px;
       max-width: 100%;
       object-fit: contain;
-      mix-blend-mode: screen;
     }
 
     .segment-chain {
       display: flex;
       flex-direction: column;
-      gap: 8px;
     }
 
     .segment {
       position: relative;
-      padding: 9px 10px 8px;
-      border-radius: 12px;
-      background: rgba(26, 33, 44, 0.95);
-      border: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 10px;
+      min-height: 42px;
       text-align: center;
-    }
-    .segment.final {
-      border-width: 2px;
-      border-color: rgba(200, 168, 100, 0.38);
-      background: rgba(32, 36, 45, 0.95);
     }
     .segment-title {
       font-size: 15px;
-      line-height: 1.12;
-      font-weight: 700;
-      color: #f3ead7;
+      line-height: 1.14;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      filter:
+        drop-shadow(0 1px 2px rgba(0, 0, 0, 1))
+        drop-shadow(0 0 5px rgba(0, 0, 0, 0.95))
+        drop-shadow(0 0 10px rgba(0, 0, 0, 0.9))
+        drop-shadow(0 0 18px rgba(0, 0, 0, 0.8));
     }
     .segment-sub {
       margin-top: 3px;
       color: #c7bcaa;
       font: 12px/1.22 "Fontin", system-ui, sans-serif;
+      text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.95),
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 10px rgba(0, 0, 0, 0.85);
     }
 
     .minor-panel {
@@ -504,7 +547,8 @@
   <div class="frame">
     <div class="poster">
       <header class="header">
-        <h1 class="title">Path of Exile</h1>
+        <div class="title-ornament"><span></span></div>
+        <h1 class="title"><span>Path of Exile</span></h1>
         <div class="subtitle">Endgame Progression</div>
       </header>
 
@@ -559,8 +603,7 @@
               ]
             },
             {
-              "title": "Uber Neglect",
-              "final": true
+              "title": "Uber Neglect"
             }
           ]
         },
@@ -591,8 +634,7 @@
               ]
             },
             {
-              "title": "Uber Fear",
-              "final": true
+              "title": "Uber Fear"
             }
           ]
         },
@@ -627,8 +669,7 @@
               ]
             },
             {
-              "title": "Uber Dread",
-              "final": true
+              "title": "Uber Dread"
             }
           ]
         }
@@ -685,8 +726,7 @@
               "label": "Eclipse Support",
               "icon": "icons/eclipse-support.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -729,8 +769,7 @@
               "label": "Melding of the Flesh",
               "icon": "icons/melding-of-the-flesh.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -753,7 +792,6 @@
         },
         {
           "title": "Nightmare Maps",
-          "final": true,
           "badges": [
             {
               "label": "Uber Fragments",
@@ -810,8 +848,7 @@
               "label": "Nimis",
               "icon": "icons/nimis.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -849,8 +886,7 @@
               "label": "Echoes of Creation",
               "icon": "icons/echoes-of-creation.png"
             }
-          ],
-          "final": true
+          ]
         }
       ],
       "rightStages": [
@@ -896,8 +932,7 @@
               "label": "Voidforge",
               "icon": "icons/voidforge.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -954,8 +989,7 @@
               "label": "Thread of Hope (Massive)",
               "icon": "icons/thread-of-hope.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -1003,8 +1037,7 @@
               "label": "The Apostate",
               "icon": "icons/the-apostate.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     }
@@ -1013,6 +1046,7 @@
     {
       "label": "Sanctum",
       "color": "sanctum",
+      "headerArt": "sanctum-header.png",
       "stages": [
         {
           "title": "Forbidden Tomes"
@@ -1021,14 +1055,14 @@
           "title": "Sanctum"
         },
         {
-          "title": "Lycia, Herald of the Scourge",
-          "final": true
+          "title": "Lycia, Herald of the Scourge"
         }
       ]
     },
     {
       "label": "Delirium",
       "art": "delirium.png",
+      "headerArt": "delirium-header.png",
       "color": "delirium",
       "stages": [
         {
@@ -1064,8 +1098,7 @@
               "label": "Voices",
               "icon": "icons/voices.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -1082,8 +1115,7 @@
           "sub": "Ahuatotli · Kurgal · Aul"
         },
         {
-          "title": "Deep Delve",
-          "final": true
+          "title": "Deep Delve"
         }
       ]
     },
@@ -1096,7 +1128,6 @@
         },
         {
           "title": "Blueprints / Grand Heists",
-          "final": true,
           "badges": [
             {
               "label": "Replicas",
@@ -1116,8 +1147,10 @@
     },
     {
       "label": "Expedition",
-      "headerArt": "header-expedition.png",
+      "headerArt": "expedition-header.png",
+      "headerArtBlend": "screen",
       "color": "expedition",
+      "art": "expedition.jpg",
       "stages": [
         {
           "title": "Expedition encounters"
@@ -1128,21 +1161,29 @@
         },
         {
           "title": "Vendor Economy",
-          "sub": "Rog · Tujen · Dannig · Gwennen",
-          "final": true
+          "sub": "Rog · Tujen · Dannig · Gwennen"
         }
       ]
     },
     {
       "label": "Harvest",
       "color": "harvest",
+      "headerArt": "harvest-header.png",
       "stages": [
         {
           "title": "Sacred Grove",
           "badges": [
             {
-              "label": "Lifeforce",
+              "label": "Vivid Lifeforce",
               "icon": "icons/vivid-crystallised-lifeforce.png"
+            },
+            {
+              "label": "Wild Lifeforce",
+              "icon": "icons/wild-crystallised-lifeforce.png"
+            },
+            {
+              "title": "Primal Lifeforce",
+              "icon": "icons/primal-crystallised-lifeforce.png"
             }
           ]
         },
@@ -1152,9 +1193,12 @@
             {
               "label": "Sacred Lifeforce",
               "icon": "icons/sacred-crystallised-lifeforce.png"
+            },
+            {
+              "label": "Forbidden Shako",
+              "icon": "icons/forbidden-shako.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -1163,7 +1207,8 @@
       "color": "betrayal",
       "stages": [
         {
-          "title": "Jun / Syndicate"
+          "title": "Jun / Syndicate",
+          "sub": "Transportation · Fortification · Research · Intervention"
         },
         {
           "title": "Safehouses"
@@ -1172,11 +1217,14 @@
           "title": "Catarina, Master of Undeath",
           "badges": [
             {
-              "label": "Veiled currency",
+              "label": "Veiled Chaos Orb",
               "icon": "icons/veiled-chaos-orb.png"
+            },
+            {
+              "label": "Veiled Exalted Orb",
+              "icon": "icons/veiled-exalted-orb.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
@@ -1197,28 +1245,27 @@
           ]
         },
         {
-          "title": "Omnitect",
-          "final": true
+          "title": "Omnitect"
         }
       ]
     },
     {
       "label": "Bestiary",
-      "headerArt": "header-bestiary.png",
+      "headerArt": "bestiary-header.png",
       "color": "bestiary",
       "stages": [
         {
           "title": "Einhar / Beasts"
         },
         {
-          "title": "Spirit Beasts",
-          "final": true
+          "title": "Spirit Beasts"
         }
       ]
     },
     {
       "label": "Abyss",
       "art": "abyss.jpg",
+      "headerArt": "abyss-header.png",
       "color": "abyss",
       "stages": [
         {
@@ -1236,8 +1283,7 @@
         },
         {
           "title": "Abyssal Depths",
-          "sub": "Amanamu · Ulaman",
-          "final": true
+          "sub": "Amanamu · Ulaman"
         }
       ]
     },
@@ -1253,36 +1299,61 @@
               "label": "Tainted currency",
               "icon": "icons/tainted-chaos-orb.png"
             }
-          ],
-          "final": true
+          ]
         }
       ]
     },
     {
       "label": "Blight",
       "art": "blight-2.png",
-      "headerArt": "header-blight.jpg",
+      "artPos": "center -60px",
+      "headerArt": "blight-header.jpg",
       "color": "blight",
       "stages": [
         {
-          "title": "Blight encounters"
+          "title": "Blight Encounters",
+          "badges": [
+            {
+              "label": "Sepia Oil",
+              "icon": "icons/sepia-oil.png"
+            },
+            {
+              "label": "Teal Oil",
+              "icon": "icons/teal-oil.png"
+            },
+            {
+              "label": "Azure Oil",
+              "icon": "icons/azure-oil.png"
+            }
+          ]
         },
         {
           "title": "Blighted Maps",
           "badges": [
             {
-              "label": "Oils",
-              "icon": "icons/golden-oil.png"
+              "label": "Opalescent Oil",
+              "icon": "icons/opalescent-oil.png"
+            },
+            {
+              "label": "Silver Oil",
+              "icon": "icons/silver-oil.png"
             }
           ]
         },
         {
           "title": "Blight-Ravaged Maps",
-          "final": true,
           "badges": [
             {
-              "label": "Rare Oils",
+              "label": "Golden Oil",
+              "icon": "icons/golden-oil.png"
+            },
+            {
+              "label": "Tainted Oil",
               "icon": "icons/tainted-oil.png"
+            },
+            {
+              "label": "Prismatic Oil",
+              "icon": "icons/prismatic-oil.png"
             }
           ]
         }
@@ -1298,7 +1369,6 @@
         },
         {
           "title": "Breachlords",
-          "final": true,
           "badges": [
             "Genesis Tree",
             "Foulborn"
@@ -1315,7 +1385,6 @@
         },
         {
           "title": "Timeless Conflict",
-          "final": true,
           "badges": [
             {
               "label": "Timeless Jewels",
@@ -1340,8 +1409,7 @@
           ]
         },
         {
-          "title": "The King in the Mists",
-          "final": true
+          "title": "The King in the Mists"
         }
       ]
     },
@@ -1363,8 +1431,7 @@
           ]
         },
         {
-          "title": "The Trialmaster",
-          "final": true
+          "title": "The Trialmaster"
         }
       ]
     }
@@ -1389,7 +1456,7 @@
 
     function makeNode(stage, cls = 'node') {
       const div = document.createElement('div');
-      div.className = `${cls}${stage.final ? ' final' : ''}${stage.entry ? ' entry' : ''}`;
+      div.className = cls;
       div.innerHTML = `<div class="${cls === 'segment' ? 'segment-title' : 'node-title'}"><span>${stage.title}</span></div>`;
       if (stage.sub) {
         const sub = document.createElement('div');
@@ -1456,14 +1523,12 @@
       const chain = document.createElement('div');
       chain.className = nodeClass === 'segment' ? 'segment-chain' : 'chain';
       stages.forEach((stage, i) => {
-        if (i > 0 && nodeClass === 'node') {
+        if (i > 0) {
           const sep = document.createElement('div');
           sep.className = 'chain-sep';
           chain.appendChild(sep);
         }
-        const node = makeNode({ ...stage, entry: i === 0 && nodeClass === 'node' }, nodeClass);
-        if (i === 0 && nodeClass === 'node') node.classList.add('entry');
-        chain.appendChild(node);
+        chain.appendChild(makeNode(stage, nodeClass));
       });
       return chain;
     }
@@ -1525,6 +1590,7 @@
         const img = document.createElement('img');
         img.src = `art/${mech.headerArt}`;
         img.alt = mech.label;
+        if (mech.headerArtBlend) img.style.mixBlendMode = mech.headerArtBlend;
         head.appendChild(img);
       } else {
         head.textContent = mech.label;
