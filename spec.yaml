@@ -40,6 +40,7 @@ content:
     label: Exarch
     art: the-searing-exarch.png
     artPos: calc(50% + 7px) -55px
+    artDim: 1.2
     stages:
     - title: Exarch-influenced maps
     - title: The Black Star
@@ -62,6 +63,7 @@ content:
     label: Eater
     art: eater-of-worlds.png
     artPos: calc(50% + 7px) -75px
+    artDim: 1.2
     stages:
     - title: Eater-influenced maps
     - title: The Infinite Hunger
@@ -84,6 +86,7 @@ content:
     label: Maven
     art: maven.png
     artPos: calc(50% - 7px) -25px
+    artDim: 1.2
     stages:
     - title: Maven witnessing
     - title: Maven Invitations
@@ -234,6 +237,7 @@ content:
     label: Synthesis
     art: venarius.webp
     artPos: center -50px
+    artDim: 1.2
     stages:
     - title: Synthesis Maps
     - title: Cortex<br>Venarius

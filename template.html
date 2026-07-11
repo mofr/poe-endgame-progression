@@ -161,7 +161,7 @@
       border-color: color-mix(in srgb, currentColor 26%, transparent);
       box-shadow: inset 0 0 34px rgba(4, 8, 12, 0.45), 0 0 22px color-mix(in srgb, currentColor 10%, transparent);
     }
-    .has-art .node, .has-art .segment {
+    .has-art .segment {
       background: linear-gradient(180deg, rgba(19, 26, 35, 0.90), rgba(10, 15, 21, 0.90));
       border-color: color-mix(in srgb, currentColor 14%, transparent);
     }
@@ -172,6 +172,7 @@
     .span-4 { grid-column: span 4; }
 
     .branch-tag {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -186,12 +187,26 @@
       margin: 0 auto 12px;
       color: inherit;
     }
+    .branch-tag::after {
+      content: "";
+      position: absolute;
+      top: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 195, 154, 0.4), transparent);
+    }
 
     .chain {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: 10px;
+    }
+    /* Invisible spacer that grows to fill the gap between two stages. */
+    .chain-sep {
+      flex: 1 1 14px;
+      min-height: 14px;
     }
 
     .node {
@@ -199,25 +214,35 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 11px 12px 10px;
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(26, 33, 44, 0.96), rgba(14, 18, 24, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      padding: 10px 12px;
       min-height: 58px;
-    }
-    .node.entry { background: linear-gradient(180deg, rgba(24, 30, 39, 0.95), rgba(14, 18, 24, 0.95)); }
-    .node.final {
-      border-width: 2px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 0 18px rgba(200, 168, 100, 0.08);
     }
 
     .node-title {
       font-size: 19px;
-      line-height: 1.08;
-      font-weight: 700;
-      color: #f3ead7;
+      line-height: 1.14;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       text-align: center;
+      filter:
+        drop-shadow(0 1px 2px rgba(0, 0, 0, 1))
+        drop-shadow(0 0 5px rgba(0, 0, 0, 0.95))
+        drop-shadow(0 0 10px rgba(0, 0, 0, 0.9))
+        drop-shadow(0 0 18px rgba(0, 0, 0, 0.8));
+    }
+    /* Inline span + box-decoration-break: clone restarts the gradient on every line. */
+    .node-title span {
+      background: linear-gradient(180deg, #f7efd9 25%, #d9c088 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    .node.final .node-title span {
+      background: linear-gradient(180deg, #ffffff 15%, #ecd9a4 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
     .boss-col .node-title, .boss-wide .node-title { font-size: 16px; }
     .node-sub {
@@ -225,6 +250,10 @@
       color: #cac0ad;
       font: 13px/1.22 "Fontin", system-ui, sans-serif;
       text-align: center;
+      text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.95),
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 10px rgba(0, 0, 0, 0.85);
     }
     .small-list {
       margin: 6px 0 0;
@@ -266,7 +295,9 @@
       height: 30px;
       max-width: 42px;
       object-fit: contain;
-      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+      filter:
+        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.95))
+        drop-shadow(0 0 10px rgba(0, 0, 0, 0.85));
     }
     .badge-icon:hover::after {
       content: attr(data-label);
@@ -505,7 +536,7 @@
     function makeNode(stage, cls = 'node') {
       const div = document.createElement('div');
       div.className = `${cls}${stage.final ? ' final' : ''}${stage.entry ? ' entry' : ''}`;
-      div.innerHTML = `<div class="${cls === 'segment' ? 'segment-title' : 'node-title'}">${stage.title}</div>`;
+      div.innerHTML = `<div class="${cls === 'segment' ? 'segment-title' : 'node-title'}"><span>${stage.title}</span></div>`;
       if (stage.sub) {
         const sub = document.createElement('div');
         sub.className = cls === 'segment' ? 'segment-sub' : 'node-sub';
@@ -569,6 +600,11 @@
       const chain = document.createElement('div');
       chain.className = nodeClass === 'segment' ? 'segment-chain' : 'chain';
       stages.forEach((stage, i) => {
+        if (i > 0 && nodeClass === 'node') {
+          const sep = document.createElement('div');
+          sep.className = 'chain-sep';
+          chain.appendChild(sep);
+        }
         const node = makeNode({ ...stage, entry: i === 0 && nodeClass === 'node' }, nodeClass);
         if (i === 0 && nodeClass === 'node') node.classList.add('entry');
         chain.appendChild(node);
