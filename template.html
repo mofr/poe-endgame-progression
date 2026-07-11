@@ -17,14 +17,41 @@
       --gold: #c8a864;
       --c-exarch: #d96e47;
       --c-eater: #62c4e8;
-      --c-maven: #c59dfd;
-      --c-shaper: #aa87ff;
-      --c-elder: #7ab56f;
+      --c-maven: #b98ef7;
+      --c-shaper: #7fa8ff;
+      --c-elder: #8d86a8;
       --c-sirus: #ca4d4d;
       --c-memory: #52d5c7;
       --c-nightmare: #8fb5da;
       --c-synthesis: #84a9e4;
       --c-league: #b8a687;
+      --c-sanctum: #d4b36a;      --c2-sanctum: #7fa3c9;
+      --c-delirium: #c3c9d4;     --c2-delirium: #8a7fae;
+      --c-delve: #e8a33d;        --c2-delve: #4f8fd0;
+      --c-heist: #c9a54f;        --c2-heist: #7d95b5;
+      --c-expedition: #8fd0dd;   --c2-expedition: #b5804f;
+      --c-harvest: #58c08b;      --c2-harvest: #9a6fd0;
+      --c-betrayal: #6f74c9;     --c2-betrayal: #a84848;
+      --c-incursion: #3fa08c;    --c2-incursion: #cfa84f;
+      --c-bestiary: #c98a4b;     --c2-bestiary: #b04040;
+      --c-abyss: #57c793;        --c2-abyss: #46618a;
+      --c-beyond: #9d4f8e;       --c2-beyond: #c04545;
+      --c-blight: #b5a642;       --c2-blight: #7fae5f;
+      --c-breach: #8f5fd0;       --c2-breach: #9fd8e8;
+      --c-legion: #e0c878;       --c2-legion: #b8c4cc;
+      --c-ritual: #8e3d3d;       --c2-ritual: #5f9a8e;
+      --c-ultimatum: #c03838;    --c2-ultimatum: #cfa84f;
+    }
+
+    @font-face {
+      font-family: "Fontin";
+      src: url("fonts/Fontin-Regular.ttf") format("truetype");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "Fontin SmallCaps";
+      src: url("fonts/Fontin-SmallCaps.ttf") format("truetype");
+      font-weight: 400;
     }
 
     * { box-sizing: border-box; }
@@ -32,7 +59,7 @@
       margin: 0;
       background: #06080c;
       color: var(--text);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Fontin SmallCaps", Georgia, "Times New Roman", serif;
     }
 
     body {
@@ -48,15 +75,6 @@
       max-width: none;
     }
 
-    .note {
-      margin-bottom: 12px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(200, 168, 100, 0.22);
-      background: rgba(13, 17, 24, 0.9);
-      color: #d4cbba;
-      font: 14px/1.4 system-ui, sans-serif;
-    }
 
     .poster {
       position: relative;
@@ -98,60 +116,60 @@
       line-height: 1;
       letter-spacing: 0.07em;
       color: #f4ead5;
-      text-transform: uppercase;
     }
     .subtitle {
       margin: 10px 0 0;
       font-size: 19px;
       letter-spacing: 0.28em;
       color: #baa36f;
-      text-transform: uppercase;
     }
 
     .section-title {
       margin: 0 0 14px;
       font-size: 24px;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: #ebdfbf;
     }
-    .section-caption {
-      margin: -4px 0 18px;
-      color: #aa9f8d;
-      font: 14px/1.35 system-ui, sans-serif;
-    }
-
     .boss-section { position: relative; z-index: 1; }
     .boss-crown {
       display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-columns: repeat(__CROWN_COLUMNS__, minmax(0, 1fr));
       gap: 14px;
-      align-items: start;
       margin-bottom: 28px;
     }
 
     .boss-col, .boss-wide {
       position: relative;
-      min-height: 100%;
+      display: flex;
+      flex-direction: column;
       padding: 12px 8px 10px;
       border-radius: 18px;
       background: linear-gradient(180deg, rgba(18, 24, 33, 0.78), rgba(11, 15, 21, 0.78));
       border: 1px solid rgba(212, 195, 154, 0.10);
     }
-    .boss-col::before, .boss-wide::before {
-      content: "";
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      width: 1px;
-      height: 8px;
-      background: rgba(212, 195, 154, 0.18);
-      transform: translateX(-50%);
+    /* Texture knobs (per entry in spec.yaml): artPos → offset, artSize → scale,
+       artDim → overlay opacity multiplier (0 = raw art, 1 = default), artBlend → blend mode. */
+    .boss-col.has-art, .boss-wide.has-art, .mech-card.has-art {
+      background:
+        linear-gradient(180deg,
+          rgba(7, 13, 19, calc(0.06 * var(--art-dim, 1))) 0%,
+          rgba(7, 13, 19, calc(0.38 * var(--art-dim, 1))) 55%,
+          rgba(8, 14, 20, calc(0.82 * var(--art-dim, 1))) 82%),
+        var(--art) var(--art-pos, center top) / var(--art-size, cover) no-repeat,
+        linear-gradient(180deg, color-mix(in srgb, currentColor 25%, #1a232c), #0d1319);
+      background-blend-mode: normal, var(--art-blend, normal), normal;
+      border-color: color-mix(in srgb, currentColor 26%, transparent);
+      box-shadow: inset 0 0 34px rgba(4, 8, 12, 0.45), 0 0 22px color-mix(in srgb, currentColor 10%, transparent);
+    }
+    .has-art .node, .has-art .segment {
+      background: linear-gradient(180deg, rgba(19, 26, 35, 0.90), rgba(10, 15, 21, 0.90));
+      border-color: color-mix(in srgb, currentColor 14%, transparent);
     }
 
     .span-1 { grid-column: span 1; }
     .span-2 { grid-column: span 2; }
     .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
 
     .branch-tag {
       display: inline-flex;
@@ -165,7 +183,6 @@
       font-size: 15px;
       font-weight: 700;
       letter-spacing: 0.05em;
-      text-transform: uppercase;
       margin: 0 auto 12px;
       color: inherit;
     }
@@ -179,6 +196,9 @@
 
     .node {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 11px 12px 10px;
       border-radius: 14px;
       background: linear-gradient(180deg, rgba(26, 33, 44, 0.96), rgba(14, 18, 24, 0.96));
@@ -186,17 +206,6 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
       min-height: 58px;
     }
-    .node + .node::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      width: 1.5px;
-      height: 10px;
-      background: rgba(212, 195, 154, 0.24);
-      transform: translateX(-50%);
-    }
-
     .node.entry { background: linear-gradient(180deg, rgba(24, 30, 39, 0.95), rgba(14, 18, 24, 0.95)); }
     .node.final {
       border-width: 2px;
@@ -214,7 +223,7 @@
     .node-sub {
       margin-top: 4px;
       color: #cac0ad;
-      font: 13px/1.22 system-ui, sans-serif;
+      font: 13px/1.22 "Fontin", system-ui, sans-serif;
       text-align: center;
     }
     .small-list {
@@ -222,20 +231,20 @@
       padding: 0;
       list-style: none;
       color: #cabfae;
-      font: 12px/1.22 system-ui, sans-serif;
+      font: 12px/1.22 "Fontin", system-ui, sans-serif;
       text-align: center;
     }
     .small-list li + li { margin-top: 2px; }
     .boss-col > .chain {
-      min-height: 520px;
+      flex: 1;
       justify-content: space-between;
     }
-    .pair-grid .chain, .tri-grid .chain {
-      min-height: 390px;
-      justify-content: space-between;
+    .pair-grid > div, .tri-grid > div {
+      display: flex;
+      flex-direction: column;
     }
-    .merge-box .chain {
-      min-height: 196px;
+    .tri-grid .chain {
+      flex: 1;
       justify-content: space-between;
     }
     .boss-section .small-list { display: none; }
@@ -248,6 +257,33 @@
       gap: 5px;
       margin-top: 7px;
     }
+    .badge-icon {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .badge-icon img {
+      height: 30px;
+      max-width: 42px;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+    }
+    .badge-icon:hover::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 9px 4px;
+      border-radius: 7px;
+      border: 1px solid rgba(212, 195, 154, 0.4);
+      background: rgba(8, 11, 16, 0.96);
+      color: #f0e6d2;
+      font: 12px/1.3 "Fontin", system-ui, sans-serif;
+      white-space: nowrap;
+      z-index: 5;
+      pointer-events: none;
+    }
     .badge {
       display: inline-flex;
       align-items: center;
@@ -257,9 +293,8 @@
       border: 1px solid rgba(218, 198, 140, 0.7);
       background: rgba(67, 52, 19, 0.4);
       color: #f0dd9e;
-      font: 700 11px/1 system-ui, sans-serif;
+      font: 700 11px/1 "Fontin", system-ui, sans-serif;
       letter-spacing: 0.04em;
-      text-transform: uppercase;
       white-space: nowrap;
     }
 
@@ -272,19 +307,45 @@
     .color-eater { color: var(--c-eater); }
     .color-memory { color: var(--c-memory); }
     .color-nightmare { color: var(--c-nightmare); }
+    .color-league { color: var(--c-league); }
+    .color-sanctum { color: var(--c-sanctum); --c2: var(--c2-sanctum); }
+    .color-delirium { color: var(--c-delirium); --c2: var(--c2-delirium); }
+    .color-delve { color: var(--c-delve); --c2: var(--c2-delve); }
+    .color-heist { color: var(--c-heist); --c2: var(--c2-heist); }
+    .color-expedition { color: var(--c-expedition); --c2: var(--c2-expedition); }
+    .color-harvest { color: var(--c-harvest); --c2: var(--c2-harvest); }
+    .color-betrayal { color: var(--c-betrayal); --c2: var(--c2-betrayal); }
+    .color-incursion { color: var(--c-incursion); --c2: var(--c2-incursion); }
+    .color-bestiary { color: var(--c-bestiary); --c2: var(--c2-bestiary); }
+    .color-abyss { color: var(--c-abyss); --c2: var(--c2-abyss); }
+    .color-beyond { color: var(--c-beyond); --c2: var(--c2-beyond); }
+    .color-blight { color: var(--c-blight); --c2: var(--c2-blight); }
+    .color-breach { color: var(--c-breach); --c2: var(--c2-breach); }
+    .color-legion { color: var(--c-legion); --c2: var(--c2-legion); }
+    .color-ritual { color: var(--c-ritual); --c2: var(--c2-ritual); }
+    .color-ultimatum { color: var(--c-ultimatum); --c2: var(--c2-ultimatum); }
 
     .pair-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 12px;
     }
     .merge-box {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px dashed rgba(212, 195, 154, 0.14);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .merge-box .chain {
+      flex: 1;
+      justify-content: space-between;
+    }
+    .merge-box .chain > .node:only-child {
+      margin-top: auto;
     }
 
     .tri-grid {
+      flex: 1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
@@ -299,11 +360,17 @@
     }
 
     .mech-card {
+      display: flex;
+      flex-direction: column;
       padding: 12px 12px 14px;
       border-radius: 18px;
       border: 1px solid rgba(212, 195, 154, 0.12);
       background: linear-gradient(180deg, rgba(17, 23, 31, 0.92), rgba(12, 16, 22, 0.92));
       min-height: 204px;
+    }
+    .mech-card .segment-chain {
+      flex: 1;
+      justify-content: space-between;
     }
 
     .mech-head {
@@ -313,13 +380,26 @@
       min-height: 34px;
       margin-bottom: 12px;
       border-radius: 999px;
-      border: 1px solid rgba(184, 166, 135, 0.32);
-      background: rgba(5, 8, 12, 0.55);
-      color: #ece2cd;
+      border: 1px solid var(--c2, currentColor);
+      background: linear-gradient(180deg,
+        color-mix(in srgb, var(--c2, currentColor) 16%, rgb(5, 8, 12)),
+        rgba(5, 8, 12, 0.55));
+      color: inherit;
       font-size: 17px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      text-transform: uppercase;
+    }
+    .mech-head.has-header-art {
+      border: none;
+      background: none;
+      min-height: 48px;
+      padding: 0;
+    }
+    .mech-head img {
+      height: 48px;
+      max-width: 100%;
+      object-fit: contain;
+      mix-blend-mode: screen;
     }
 
     .segment-chain {
@@ -336,16 +416,6 @@
       border: 1px solid rgba(255,255,255,0.05);
       text-align: center;
     }
-    .segment + .segment::before {
-      content: "";
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      width: 1.5px;
-      height: 8px;
-      background: rgba(212, 195, 154, 0.20);
-      transform: translateX(-50%);
-    }
     .segment.final {
       border-width: 2px;
       border-color: rgba(200, 168, 100, 0.38);
@@ -360,7 +430,7 @@
     .segment-sub {
       margin-top: 3px;
       color: #c7bcaa;
-      font: 12px/1.22 system-ui, sans-serif;
+      font: 12px/1.22 "Fontin", system-ui, sans-serif;
     }
 
     .minor-panel {
@@ -374,7 +444,6 @@
       font-size: 21px;
       letter-spacing: 0.07em;
       color: #eddfbd;
-      text-transform: uppercase;
     }
     .minor-grid {
       display: grid;
@@ -388,14 +457,14 @@
       background: rgba(255,255,255,0.02);
       text-align: center;
       color: #d5cab4;
-      font: 13px/1.2 system-ui, sans-serif;
+      font: 13px/1.2 "Fontin", system-ui, sans-serif;
       white-space: nowrap;
     }
 
     .footnote {
       margin-top: 10px;
       color: rgba(208, 201, 185, 0.62);
-      font: 12px/1.3 system-ui, sans-serif;
+      font: 12px/1.3 "Fontin", system-ui, sans-serif;
       text-align: center;
     }
 
@@ -403,9 +472,6 @@
 </head>
 <body>
   <div class="frame">
-    <div class="note">
-      Generated from <code>spec.yaml</code>. Fixed __POSTER_WIDTH__px working canvas; narrow browser windows scroll horizontally instead of collapsing the crown.
-    </div>
     <div class="poster">
       <header class="header">
         <h1 class="title">Path of Exile</h1>
@@ -414,13 +480,11 @@
 
       <section class="boss-section">
         <h2 class="section-title">Atlas / Pinnacle Boss Crown</h2>
-        <div class="section-caption">Top-first structure. Boss branches stay prominent; dense special cases (Shaper/Elder and Memory Threads) get dedicated composite blocks instead of being forced into the same generic column.</div>
         <div id="bossCrown" class="boss-crown"></div>
       </section>
 
       <section class="mechanics-section">
         <h2 class="section-title">League & System Progression</h2>
-        <div class="section-caption">Compact progression segments below the crown. This structure is ready for future icon cues: catalysts from Ultimatum, oils from Blight, Timeless Jewels from Legion, etc.</div>
         <div id="mechanicsGrid" class="mechanics-grid"></div>
       </section>
 
@@ -461,15 +525,37 @@
       if (stage.badges) {
         const badges = document.createElement('div');
         badges.className = 'badges';
-        stage.badges.forEach(text => {
-          const badge = document.createElement('span');
-          badge.className = 'badge';
-          badge.textContent = text;
-          badges.appendChild(badge);
+        stage.badges.forEach(item => {
+          const label = typeof item === 'object' ? item.label : item;
+          if (typeof item === 'object' && item.icon) {
+            const wrap = document.createElement('span');
+            wrap.className = 'badge-icon';
+            wrap.dataset.label = label;
+            const img = document.createElement('img');
+            img.src = item.icon;
+            img.alt = label;
+            wrap.appendChild(img);
+            badges.appendChild(wrap);
+          } else {
+            const badge = document.createElement('span');
+            badge.className = 'badge';
+            badge.textContent = label;
+            badges.appendChild(badge);
+          }
         });
         div.appendChild(badges);
       }
       return div;
+    }
+
+    function applyArt(el, item) {
+      if (!item.art) return;
+      el.classList.add('has-art');
+      el.style.setProperty('--art', `url("art/${item.art}")`);
+      if (item.artPos) el.style.setProperty('--art-pos', item.artPos);
+      if (item.artSize) el.style.setProperty('--art-size', item.artSize);
+      if (item.artDim !== undefined) el.style.setProperty('--art-dim', item.artDim);
+      if (item.artBlend) el.style.setProperty('--art-blend', item.artBlend);
     }
 
     function makeBranchTag(text, colorClass) {
@@ -493,7 +579,10 @@
     DATA.bossCrown.forEach(branch => {
       const wrap = document.createElement('div');
       wrap.className = `${branch.type === 'branch' ? 'boss-col' : 'boss-wide'} span-${branch.span || 1} color-${branch.color}`;
-      wrap.appendChild(makeBranchTag(branch.label, branch.color));
+      applyArt(wrap, branch);
+      if (branch.type === 'branch') {
+        wrap.appendChild(makeBranchTag(branch.label, branch.color));
+      }
 
       if (branch.type === 'branch') {
         wrap.appendChild(makeChain(branch.stages));
@@ -523,7 +612,7 @@
       }
 
       if (branch.type === 'composite3') {
-        wrap.appendChild(makeChain([branch.entry]));
+        if (branch.entry) wrap.appendChild(makeChain([branch.entry]));
         const tri = document.createElement('div');
         tri.className = 'tri-grid';
         branch.cols.forEach(col => {
@@ -540,10 +629,19 @@
 
     DATA.mechanics.forEach(mech => {
       const card = document.createElement('div');
-      card.className = 'mech-card';
+      card.className = `mech-card color-${mech.color || 'league'}`;
+      applyArt(card, mech);
       const head = document.createElement('div');
       head.className = 'mech-head';
-      head.textContent = mech.label;
+      if (mech.headerArt) {
+        head.classList.add('has-header-art');
+        const img = document.createElement('img');
+        img.src = `art/${mech.headerArt}`;
+        img.alt = mech.label;
+        head.appendChild(img);
+      } else {
+        head.textContent = mech.label;
+      }
       card.appendChild(head);
       card.appendChild(makeChain(mech.stages, 'segment'));
       mechanicsGrid.appendChild(card);
