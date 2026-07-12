@@ -109,6 +109,7 @@ def main() -> None:
     html = html.replace("__POSTER_WIDTH__", str(layout["poster_width"]))
     html = html.replace("__POSTER_MIN_HEIGHT__", str(layout["poster_min_height"]))
     html = html.replace("__CROWN_COLUMNS__", str(layout.get("crown_columns", 12)))
+    html = html.replace("__GAME_VERSION__", str(layout["game_version"]))
     html = html.replace(
         "__POSTER_DATA__",
         json.dumps(content, ensure_ascii=False, indent=2),

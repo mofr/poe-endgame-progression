@@ -12,6 +12,7 @@
 # Keep boss-crown detail concise; put granular rewards in mechanic badges/icons.
 
 layout:
+  game_version: "3.28"
   poster_width: 2048
   poster_min_height: 2700
   crown_columns: 11
@@ -67,7 +68,7 @@ content:
     color: maven
     label: Maven
     art: maven.png
-    artPos: calc(50% - 7px)
+    artPos: calc(50% - 7px) 36px
     artDim: 1.3
     stages:
     - title: Maven witnessing
@@ -95,7 +96,7 @@ content:
     color: exarch
     label: Exarch
     art: the-searing-exarch.png
-    artPos: calc(50% + 7px) -25px
+    artPos: calc(50% + 7px) 20px
     artDim: 1.2
     stages:
     - title: Exarch-influenced maps
@@ -117,7 +118,7 @@ content:
     color: nightmare
     label: Atlas
     art: atlas.jpg
-    artPos: center -7px
+    artPos: center 24px
     stages:
     - title: White Maps
     - title: Yellow Maps
@@ -135,7 +136,7 @@ content:
     color: eater
     label: Eater
     art: eater-of-worlds.png
-    artPos: calc(50% + 7px) -45px
+    artPos: calc(50% + 7px) 0px
     artDim: 1.2
     stages:
     - title: Eater-influenced maps
@@ -157,7 +158,7 @@ content:
     color: sirus
     label: Sirus
     art: sirus.jpg
-    artPos: center -0px
+    artPos: center 36px
     stages:
     - title: Conquerors
       badges:
@@ -658,15 +659,51 @@ content:
         icon: https://www.poewiki.net/wiki/Special:FilePath/Ixchel%27s_Temptation_inventory_icon.png
       - label: Mahuxotl's Machination
         icon: https://www.poewiki.net/wiki/Special:FilePath/Mahuxotl%27s_Machination_inventory_icon.png
-  minor:
-  - Essence
-  - Strongboxes
-  - Shrines
-  - Rogue Exiles
-  - Tormented Spirits
-  - Warbands
-  - Affliction
-  - Nameless Seer
-  - Reflecting Mist
-  - Sentinel
-  - Kingsmarch / Tattoos
+  - label: Essence
+    color: essence
+    stages:
+    - title: Essence Monoliths
+      sub: Whispering → Deafening
+      badges:
+      - label: Deafening Essences
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Deafening_Essence_of_Greed_inventory_icon.png
+    - title: Corrupted Monoliths
+      badges:
+      - label: Remnant of Corruption
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Remnant_of_Corruption_inventory_icon.png
+    - title: Corrupted Essences
+      sub: Hysteria · Insanity · Horror · Delirium
+      badges:
+      - label: Essence of Hysteria
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Essence_of_Hysteria_inventory_icon.png
+      - label: Essence of Delirium
+        icon: https://www.poewiki.net/wiki/Special:FilePath/Essence_of_Delirium_inventory_icon.png
+  - label: Kingsmarch
+    color: kingsmarch
+    span: 3
+    cols:
+    - label: Workforce
+      stages:
+      - title: Miners · Farmers
+        sub: Ore · Crops · Gold
+      - title: Rog, The Disenchanter
+        sub: Thaumaturgic Dust
+      - title: Recombination
+    - label: Shipping
+      stages:
+      - title: Kalguuran Ports
+        sub: Riben Fell · Pondium · Kalguur
+        badges:
+        - label: Runegrafts
+          icon: https://www.poewiki.net/wiki/Special:FilePath/Runegraft_of_Fury_inventory_icon.png
+      - title: Karui Ports
+        badges:
+        - label: Tattoos
+          icon: https://www.poewiki.net/wiki/Special:FilePath/Honoured_Tattoo_of_the_Makanga_inventory_icon.png
+      - title: Trade Routes
+    - label: Atlas Runners
+      stages:
+      - title: Kalguuran Map Device
+      - title: Assigned Map Runners
+        sub: Mapping level · worker risk
+      - title: Automated map clears
