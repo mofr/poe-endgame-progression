@@ -38,6 +38,26 @@ Recommended viewing:
 - For content review, keep the browser at 100% and scroll horizontally/vertically.
 - For a whole-poster overview, zoom out. Do not judge text size at overview zoom.
 
+## Print output
+
+The screen build in `dist/` is the single source of truth; `print.py` rasterizes it
+with headless Chromium at high pixel density, so every blur, mask and blend mode
+prints exactly as it looks in the browser:
+
+```bash
+python -m pip install playwright img2pdf   # once
+python -m playwright install chromium      # once
+python print.py                            # or --scale 4 for ~340 dpi
+```
+
+Outputs land in `print/` (gitignored):
+
+- `poster.png` — the lossless master (6240 × 8196 px at the default 3× scale);
+- `poster.pdf` — the same pixels wrapped losslessly with physical dimensions
+  (61 × 80 cm / 24 × 31.5 in at 260 dpi) — hand this one to the print shop.
+
+The dark body margin around the poster is included and works as bleed.
+
 ## Updating for a league
 
 Edit only `spec.yaml` for most changes:
