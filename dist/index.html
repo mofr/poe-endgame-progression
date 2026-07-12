@@ -30,8 +30,8 @@
       --c-delve: #e8a33d;        --c2-delve: #4f8fd0;
       --c-heist: #c9a54f;        --c2-heist: #7d95b5;
       --c-expedition: #8fd0dd;   --c2-expedition: #b5804f;
-      --c-harvest: #58c08b;      --c2-harvest: #9a6fd0;
-      --c-betrayal: #6f74c9;     --c2-betrayal: #a84848;
+      --c-harvest: #5cb6e4;      --c2-harvest: #9a6fd0;
+      --c-betrayal: #c47a3a;     --c2-betrayal: #5f9aa8;
       --c-incursion: #3fa08c;    --c2-incursion: #cfa84f;
       --c-bestiary: #c98a4b;     --c2-bestiary: #b04040;
       --c-abyss: #57c793;        --c2-abyss: #46618a;
@@ -221,7 +221,7 @@
     }
 
     .section-title {
-      margin: 0 0 14px;
+      margin: 0 0 26px;
       font-size: 24px;
       letter-spacing: 0.12em;
       color: #ebdfbf;
@@ -240,6 +240,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      min-height: 500px;
       padding: 12px 8px 10px;
       border-radius: 18px;
       background: linear-gradient(180deg, rgba(18, 24, 33, 0.78), rgba(11, 15, 21, 0.78));
@@ -444,13 +445,19 @@
     .color-ultimatum { color: var(--c-ultimatum); --c2: var(--c2-ultimatum); }
 
     .pair-grid {
+      /* basis auto: keep content height, share only leftover space (2 gaps : 1 gap) */
+      flex: 2 1 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-bottom: 12px;
     }
-    .merge-box {
+    .pair-grid .chain {
       flex: 1;
+      justify-content: space-between;
+    }
+    .merge-box {
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
     }
@@ -469,7 +476,7 @@
       gap: 10px;
     }
 
-    .mechanics-section { position: relative; z-index: 1; margin-top: 12px; }
+    .mechanics-section { position: relative; z-index: 1; margin-top: 38px; }
     .mechanics-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -514,7 +521,7 @@
       padding: 0;
     }
     .mech-head img {
-      height: 48px;
+      height: calc(48px * var(--header-art-scale, 1));
       max-width: 100%;
       object-fit: contain;
     }
@@ -633,7 +640,6 @@
       "color": "memory",
       "label": "Memory Threads",
       "art": "atlas-memory.png",
-      "artDim": 1.0,
       "cols": [
         {
           "label": "Loneliness",
@@ -736,7 +742,7 @@
       "color": "maven",
       "label": "Maven",
       "art": "maven.png",
-      "artPos": "calc(50% - 7px) -5px",
+      "artPos": "calc(50% - 7px)",
       "artDim": 1.3,
       "stages": [
         {
@@ -908,90 +914,6 @@
       ]
     },
     {
-      "type": "composite",
-      "span": 2,
-      "color": "shaper",
-      "label": "Shaper / Elder",
-      "art": "shaper-elder.jpg",
-      "artPos": "calc(50% - 10px) -130px",
-      "artSize": "110%",
-      "leftLabel": "Shaper",
-      "rightLabel": "Elder",
-      "leftStages": [
-        {
-          "title": "Shaper<br>Guardians"
-        },
-        {
-          "title": "The Shaper",
-          "badges": [
-            {
-              "label": "Decayed Voidstone",
-              "icon": "icons/decayed-voidstone.png"
-            },
-            {
-              "label": "Shaper's Touch",
-              "icon": "icons/shaper-s-touch.png"
-            }
-          ]
-        },
-        {
-          "title": "Uber Shaper",
-          "badges": [
-            {
-              "label": "Echoes of Creation",
-              "icon": "icons/echoes-of-creation.png"
-            }
-          ]
-        }
-      ],
-      "rightStages": [
-        {
-          "title": "Elder<br>Guardians"
-        },
-        {
-          "title": "The Elder",
-          "badges": [
-            {
-              "label": "Decayed Voidstone",
-              "icon": "icons/decayed-voidstone.png"
-            },
-            {
-              "label": "Watcher's Eye (2-mod)",
-              "icon": "icons/watcher-s-eye.png"
-            }
-          ]
-        },
-        {
-          "title": "Uber Elder (duo)",
-          "badges": [
-            {
-              "label": "Watcher's Eye (3-mod)",
-              "icon": "icons/watcher-s-eye.png"
-            }
-          ]
-        }
-      ],
-      "mergeStages": [
-        {
-          "title": "Uber Uber Elder",
-          "badges": [
-            {
-              "label": "Sublime Vision",
-              "icon": "icons/sublime-vision.png"
-            },
-            {
-              "label": "Call of the Void",
-              "icon": "icons/call-of-the-void.png"
-            },
-            {
-              "label": "Voidforge",
-              "icon": "icons/voidforge.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "type": "branch",
       "span": 1,
       "color": "sirus",
@@ -1049,6 +971,102 @@
       ]
     },
     {
+      "type": "composite",
+      "span": 2,
+      "color": "shaper",
+      "label": "Shaper / Elder",
+      "art": "shaper-elder.jpg",
+      "artPos": "calc(50% - 10px) -10px",
+      "artSize": "110%",
+      "leftLabel": "Shaper",
+      "rightLabel": "Elder",
+      "leftStages": [
+        {
+          "title": "Shaper<br>Guardians",
+          "badges": [
+            {
+              "label": "Shaper-influenced Item",
+              "icon": "icons/shaper-item-symbol.png"
+            }
+          ]
+        },
+        {
+          "title": "The Shaper",
+          "badges": [
+            {
+              "label": "Decayed Voidstone",
+              "icon": "icons/decayed-voidstone.png"
+            },
+            {
+              "label": "Shaper's Touch",
+              "icon": "icons/shaper-s-touch.png"
+            }
+          ]
+        },
+        {
+          "title": "Uber Shaper",
+          "badges": [
+            {
+              "label": "Echoes of Creation",
+              "icon": "icons/echoes-of-creation.png"
+            }
+          ]
+        }
+      ],
+      "rightStages": [
+        {
+          "title": "Elder<br>Guardians",
+          "badges": [
+            {
+              "label": "Elder-influenced Item",
+              "icon": "icons/elder-item-symbol.png"
+            }
+          ]
+        },
+        {
+          "title": "The Elder",
+          "badges": [
+            {
+              "label": "Decayed Voidstone",
+              "icon": "icons/decayed-voidstone.png"
+            },
+            {
+              "label": "Watcher's Eye (2-mod)",
+              "icon": "icons/watcher-s-eye.png"
+            }
+          ]
+        },
+        {
+          "title": "Uber Elder",
+          "badges": [
+            {
+              "label": "Watcher's Eye (3-mod)",
+              "icon": "icons/watcher-s-eye.png"
+            }
+          ]
+        }
+      ],
+      "mergeStages": [
+        {
+          "title": "Uber Uber Elder",
+          "badges": [
+            {
+              "label": "Sublime Vision",
+              "icon": "icons/sublime-vision.png"
+            },
+            {
+              "label": "Call of the Void",
+              "icon": "icons/call-of-the-void.png"
+            },
+            {
+              "label": "Voidforge",
+              "icon": "icons/voidforge.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "type": "branch",
       "span": 1,
       "color": "synthesis",
@@ -1099,18 +1117,42 @@
   ],
   "mechanics": [
     {
-      "label": "Sanctum",
-      "color": "sanctum",
-      "headerArt": "sanctum-header.png",
+      "label": "Harvest",
+      "color": "harvest",
+      "art": "harvest-2.png",
+      "headerArt": "harvest-header.png",
+      "headerArtScale": 1.4,
       "stages": [
         {
-          "title": "Forbidden Tomes"
+          "title": "The Sacred Grove",
+          "sub": "Namharim · Ersi · Janaar",
+          "badges": [
+            {
+              "label": "Vivid Lifeforce",
+              "icon": "icons/vivid-crystallised-lifeforce.png"
+            },
+            {
+              "label": "Wild Lifeforce",
+              "icon": "icons/wild-crystallised-lifeforce.png"
+            },
+            {
+              "title": "Primal Lifeforce",
+              "icon": "icons/primal-crystallised-lifeforce.png"
+            }
+          ]
         },
         {
-          "title": "Sanctum"
-        },
-        {
-          "title": "Lycia, Herald of the Scourge"
+          "title": "Oshabi, Avatar of the Grove",
+          "badges": [
+            {
+              "label": "Sacred Lifeforce",
+              "icon": "icons/sacred-crystallised-lifeforce.png"
+            },
+            {
+              "label": "Forbidden Shako",
+              "icon": "icons/forbidden-shako.png"
+            }
+          ]
         }
       ]
     },
@@ -1159,42 +1201,309 @@
     },
     {
       "label": "Delve",
+      "headerArt": "delve-header.png",
       "art": "delve.png",
       "color": "delve",
       "stages": [
         {
-          "title": "Niko / Sulphite"
-        },
-        {
           "title": "Azurite Mine",
-          "sub": "Ahuatotli · Kurgal · Aul"
+          "badges": [
+            {
+              "label": "Aberrant Fossil",
+              "icon": "icons/aberrant-fossil.png"
+            },
+            {
+              "label": "Prismatic Fossil",
+              "icon": "icons/prismatic-fossil.png"
+            },
+            {
+              "label": "Primitive Chaotic Resonator",
+              "icon": "icons/primitive-chaotic-resonator.png"
+            },
+            {
+              "label": "Prime Chaotic Resonator",
+              "icon": "icons/prime-chaotic-resonator.png"
+            }
+          ]
         },
         {
-          "title": "Deep Delve"
+          "title": "Deep Delve",
+          "sub": "Ahuatotli · Kurgal · Aul",
+          "badges": [
+            {
+              "label": "Curiosity",
+              "icon": "icons/231px-vaal-aspect-2-of-4.png"
+            },
+            {
+              "label": "Precursor's Emblem",
+              "icon": "icons/precursor-s-emblem-frenzy-and-power-charge.png"
+            },
+            {
+              "label": "Aul's Uprising",
+              "icon": "icons/aul-s-uprising.png"
+            }
+          ]
         }
       ]
     },
     {
       "label": "Heist",
       "color": "heist",
+      "art": "heist-2.png",
+      "headerArt": "heist-header.png",
       "stages": [
         {
-          "title": "Contracts"
-        },
-        {
-          "title": "Blueprints / Grand Heists",
+          "title": "Contracts",
           "badges": [
             {
-              "label": "Replicas",
-              "icon": "icons/replica-headhunter.png"
+              "label": "Sunder of Trarthus",
+              "icon": "icons/sunder-of-trarthus.png"
             },
             {
-              "label": "Experimented Bases",
-              "icon": "icons/convoking-wand.png"
+              "label": "Spectral Throw of Trarthus",
+              "icon": "icons/spectral-throw-of-trarthus.png"
             },
             {
-              "label": "Trarthan Gems",
-              "icon": "icons/prime-regrading-lens.png"
+              "label": "Wave of Conviction of Trarthus",
+              "icon": "icons/wave-of-conviction-of-trarthus.png"
+            }
+          ]
+        },
+        {
+          "title": "Grand Heists",
+          "sub": "Curio Display",
+          "badges": [
+            {
+              "label": "Tempering Orb",
+              "icon": "icons/tempering-orb.png"
+            },
+            {
+              "label": "Replica Alberon's Warpath",
+              "icon": "icons/alberon-s-warpath.png"
+            },
+            {
+              "label": "Focused Amulet",
+              "icon": "icons/focused-amulet.png"
+            },
+            {
+              "label": "Magmatic Tower Shield",
+              "icon": "icons/magmatic-tower-shield.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Breach",
+      "headerArt": "breach-header.png",
+      "headerArtScale": 1.5,
+      "art": "breach-3.png",
+      "color": "breach",
+      "stages": [
+        {
+          "title": "Breaches",
+          "badges": [
+            {
+              "label": "Foulborn Exalted Orb",
+              "icon": "icons/foulborn-exalted-orb.png"
+            },
+            {
+              "label": "Foulborn Orb of Augmentation",
+              "icon": "icons/foulborn-orb-of-augmentation.png"
+            },
+            {
+              "label": "Foulborn Regal Orb",
+              "icon": "icons/foulborn-regal-orb.png"
+            },
+            {
+              "label": "Ancient Wombgift",
+              "icon": "icons/ancient-wombgift.png"
+            }
+          ]
+        },
+        {
+          "title": "Stabilized Breaches",
+          "sub": "Vruun, Marshal of Xesht",
+          "badges": [
+            {
+              "label": "Enthalpic Ring",
+              "icon": "icons/enthalpic-ring.png"
+            },
+            {
+              "label": "Cryonic Ring",
+              "icon": "icons/cryonic-ring.png"
+            },
+            {
+              "label": "Synaptic Ring",
+              "icon": "icons/synaptic-ring.png"
+            },
+            {
+              "label": "Organic Ring",
+              "icon": "icons/organic-ring.png"
+            },
+            {
+              "label": "Fugitive Ring",
+              "icon": "icons/fugitive-ring.png"
+            }
+          ]
+        },
+        {
+          "title": "Hive Colony",
+          "sub": "It That Was Esh · It That Was Tul",
+          "badges": [
+            {
+              "label": "Flesh of Xesht",
+              "icon": "icons/flesh-of-xesht.png"
+            },
+            {
+              "label": "The Grey Wind",
+              "icon": "icons/the-grey-wind.png"
+            },
+            {
+              "label": "Uul-Netol's Vow",
+              "icon": "icons/uul-netol-s-vow.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Sanctum",
+      "color": "sanctum",
+      "art": "sanctum-2.png",
+      "headerArt": "sanctum-header.png",
+      "headerArtScale": 1.3,
+      "stages": [
+        {
+          "title": "The Forbidden Sanctum",
+          "sub": "Varakath · Braom · Xenathar",
+          "badges": [
+            {
+              "label": "Divine Orb",
+              "icon": "icons/divine-orb.png"
+            },
+            {
+              "label": "Exalted Orb",
+              "icon": "icons/exalted-orb.png"
+            },
+            {
+              "label": "Sacred Orb",
+              "icon": "icons/sacred-orb.png"
+            }
+          ]
+        },
+        {
+          "title": "Beyond",
+          "sub": "Lycia, Herald of the Scourge",
+          "badges": [
+            {
+              "label": "Sandstorm Visage",
+              "icon": "icons/sandstorm-visage.png"
+            },
+            {
+              "label": "The Balance of Terror",
+              "icon": "icons/the-balance-of-terror.png"
+            }
+          ]
+        },
+        {
+          "title": "No-hit run",
+          "badges": [
+            {
+              "label": "Original Sin",
+              "icon": "icons/original-sin.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Betrayal",
+      "color": "betrayal",
+      "art": "betrayal-2.png",
+      "artPos": "center -80px",
+      "headerArt": "betrayal-header.png",
+      "stages": [
+        {
+          "title": "Investigation",
+          "sub": "Transportation · Fortification · Research · Intervention"
+        },
+        {
+          "title": "Safehouses",
+          "badges": [
+            {
+              "label": "Veiled Chaos Orb",
+              "icon": "icons/veiled-chaos-orb.png"
+            },
+            {
+              "label": "Signature Veiled Items",
+              "icon": "icons/veiled-item-symbol.png"
+            },
+            {
+              "label": "Allflame Ember of the Ethereal",
+              "icon": "icons/allflame-ember-of-the-ethereal.png"
+            }
+          ]
+        },
+        {
+          "title": "Mastermind Safehouse",
+          "sub": "Catarina, Master of Undeath",
+          "badges": [
+            {
+              "label": "Veiled Exalted Orb",
+              "icon": "icons/veiled-exalted-orb.png"
+            },
+            {
+              "label": "Cinderswallow Urn",
+              "icon": "icons/cinderswallow-urn.png"
+            },
+            {
+              "label": "The Devouring Diadem",
+              "icon": "icons/the-devouring-diadem.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Incursion",
+      "color": "incursion",
+      "headerArt": "incursion-header.png",
+      "art": "incursion.png",
+      "artDim": 1.3,
+      "stages": [
+        {
+          "title": "Alva missions"
+        },
+        {
+          "title": "Temple of Atzoatl",
+          "sub": "Doryani's Institute · Locus of Corruption",
+          "badges": [
+            {
+              "label": "Doryani's Institute",
+              "icon": "icons/vaal-molten-shell.png"
+            },
+            {
+              "label": "Locus of Corruption",
+              "icon": "icons/vaal-orb.png"
+            }
+          ]
+        },
+        {
+          "title": "Apex of Atzoatl",
+          "sub": "The Vaal Omnitect",
+          "badges": [
+            {
+              "label": "Ambition",
+              "icon": "icons/ambition.png"
+            },
+            {
+              "label": "Soul Catcher",
+              "icon": "icons/soul-catcher.png"
+            },
+            {
+              "label": "Vial of Dominance",
+              "icon": "icons/vial-of-dominance.png"
             }
           ]
         }
@@ -1205,129 +1514,112 @@
       "headerArt": "expedition-header.png",
       "headerArtBlend": "screen",
       "color": "expedition",
-      "art": "expedition.jpg",
+      "art": "expedition.png",
       "stages": [
         {
-          "title": "Expedition encounters"
+          "title": "Expedition Encounters",
+          "sub": "Gwennen · Tujen · Rog · Dannig",
+          "badges": [
+            {
+              "label": "Astragali",
+              "icon": "icons/astragali.png"
+            },
+            {
+              "label": "Exotic Coinage",
+              "icon": "icons/exotic-coinage.png"
+            },
+            {
+              "label": "Scrap Metal",
+              "icon": "icons/scrap-metal.png"
+            },
+            {
+              "label": "Iron Flask",
+              "icon": "icons/iron-flask.png"
+            }
+          ]
         },
         {
           "title": "Logbooks",
-          "sub": "Olroth · Uhtred · Vorana · Medved"
-        },
-        {
-          "title": "Vendor Economy",
-          "sub": "Rog · Tujen · Dannig · Gwennen"
-        }
-      ]
-    },
-    {
-      "label": "Harvest",
-      "color": "harvest",
-      "headerArt": "harvest-header.png",
-      "stages": [
-        {
-          "title": "Sacred Grove",
+          "sub": "Medved · Vorana · Uhtred · Olroth",
           "badges": [
             {
-              "label": "Vivid Lifeforce",
-              "icon": "icons/vivid-crystallised-lifeforce.png"
+              "label": "Elixir of the Unbroken Circle",
+              "icon": "icons/elixir-of-the-unbroken-circle.png"
             },
             {
-              "label": "Wild Lifeforce",
-              "icon": "icons/wild-crystallised-lifeforce.png"
+              "label": "Vorana's Preparation",
+              "icon": "icons/vorana-s-preparation.png"
             },
             {
-              "title": "Primal Lifeforce",
-              "icon": "icons/primal-crystallised-lifeforce.png"
-            }
-          ]
-        },
-        {
-          "title": "Oshabi, Avatar of the Grove",
-          "badges": [
-            {
-              "label": "Sacred Lifeforce",
-              "icon": "icons/sacred-crystallised-lifeforce.png"
+              "label": "Starlight Chalice",
+              "icon": "icons/starlight-chalice.png"
             },
             {
-              "label": "Forbidden Shako",
-              "icon": "icons/forbidden-shako.png"
+              "label": "Olroth's Resolve",
+              "icon": "icons/olroth-s-resolve.png"
             }
           ]
-        }
-      ]
-    },
-    {
-      "label": "Betrayal",
-      "color": "betrayal",
-      "stages": [
-        {
-          "title": "Jun / Syndicate",
-          "sub": "Transportation · Fortification · Research · Intervention"
-        },
-        {
-          "title": "Safehouses"
-        },
-        {
-          "title": "Catarina, Master of Undeath",
-          "badges": [
-            {
-              "label": "Veiled Chaos Orb",
-              "icon": "icons/veiled-chaos-orb.png"
-            },
-            {
-              "label": "Veiled Exalted Orb",
-              "icon": "icons/veiled-exalted-orb.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Incursion",
-      "color": "incursion",
-      "stages": [
-        {
-          "title": "Alva missions"
-        },
-        {
-          "title": "Temple of Atzoatl",
-          "badges": [
-            {
-              "label": "Double Corrupt",
-              "icon": "icons/vaal-orb.png"
-            }
-          ]
-        },
-        {
-          "title": "Omnitect"
         }
       ]
     },
     {
       "label": "Bestiary",
-      "headerArt": "bestiary-header.png",
+      "headerArt": "bestiary-header-2.png",
+      "headerArtScale": 1.3,
       "color": "bestiary",
+      "art": "bestiary.png",
       "stages": [
         {
-          "title": "Einhar / Beasts"
+          "title": "Beasts",
+          "sub": "The Black Mórrígan · Harvest Beasts",
+          "badges": [
+            {
+              "label": "The Black Mórrígan",
+              "icon": "icons/hinekora-s-lock.png"
+            },
+            {
+              "label": "Watcher's Eye Reroll",
+              "icon": "icons/watcher-s-eye.png"
+            }
+          ]
         },
         {
-          "title": "Spirit Beasts"
+          "title": "Spirit Beasts",
+          "sub": "Craiceann · Farrul · Fenumus · Saqawal",
+          "badges": [
+            {
+              "label": "Craiceann's Chitin",
+              "icon": "icons/craiceann-s-chitin.png"
+            },
+            {
+              "label": "Farrul's Bite",
+              "icon": "icons/farrul-s-bite.png"
+            },
+            {
+              "label": "Fenumus' Toxins",
+              "icon": "icons/fenumus-toxins.png"
+            },
+            {
+              "label": "Saqawal's Flock",
+              "icon": "icons/saqawal-s-flock.png"
+            }
+          ]
         }
       ]
     },
     {
       "label": "Abyss",
-      "art": "abyss.jpg",
+      "art": "abyss-2.png",
+      "artPos": "center -600px",
       "headerArt": "abyss-header.png",
       "color": "abyss",
       "stages": [
         {
           "title": "Abysses",
+          "sub": "Stygian Spire",
           "badges": [
             {
-              "label": "Abyss Jewels",
+              "label": "Murderous Eye Jewel",
               "icon": "icons/murderous-eye-jewel.png"
             },
             {
@@ -1338,21 +1630,71 @@
         },
         {
           "title": "Abyssal Depths",
-          "sub": "Amanamu · Ulaman"
+          "sub": "Amanamu · Ulaman",
+          "badges": [
+            {
+              "label": "Tecrod's Gaze",
+              "icon": "icons/tecrod-s-gaze.png"
+            },
+            {
+              "label": "Ulaman's Gaze",
+              "icon": "icons/ulaman-s-gaze.png"
+            },
+            {
+              "label": "Kurgal's Gaze",
+              "icon": "icons/kurgal-s-gaze.png"
+            },
+            {
+              "label": "Darkness Enthroned",
+              "icon": "icons/darkness-enthroned.png"
+            }
+          ]
         }
       ]
     },
     {
       "label": "Beyond",
       "color": "beyond",
+      "art": "beyond-2.png",
+      "headerArt": "beyond-header.png",
+      "headerArtScale": 1.3,
       "stages": [
         {
           "title": "Beyond demons",
-          "sub": "K’tash · Ghorr · Beidat",
           "badges": [
             {
-              "label": "Tainted currency",
+              "label": "Tainted Armourer's Scrap",
+              "icon": "icons/tainted-armourer-s-scrap.png"
+            },
+            {
+              "label": "Tainted Blacksmith's Whetstone",
+              "icon": "icons/tainted-blacksmith-s-whetstone.png"
+            },
+            {
+              "label": "Tainted Orb of Fusing",
+              "icon": "icons/tainted-orb-of-fusing.png"
+            },
+            {
+              "label": "Tainted Chromatic Orb",
+              "icon": "icons/tainted-chromatic-orb.png"
+            },
+            {
+              "label": "Tainted Chaos Orb",
               "icon": "icons/tainted-chaos-orb.png"
+            },
+            {
+              "label": "Tainted Exalted Orb",
+              "icon": "icons/tainted-exalted-orb.png"
+            }
+          ]
+        },
+        {
+          "title": "Beyond bosses",
+          "sub": "Ghorr · Beidat · K’tash",
+          "badges": [
+            {
+              "label": "Volatile Vaal Orb",
+              "icon": "icons/volatile-vaal-orb.png"
             }
           ]
         }
@@ -1360,9 +1702,8 @@
     },
     {
       "label": "Blight",
-      "art": "blight-2.png",
-      "artPos": "center -60px",
-      "headerArt": "blight-header.jpg",
+      "art": "blight.png",
+      "headerArt": "blight-header.png",
       "color": "blight",
       "stages": [
         {
@@ -1384,20 +1725,12 @@
         },
         {
           "title": "Blighted Maps",
+          "sub": "Blight-Ravaged Maps",
           "badges": [
             {
               "label": "Opalescent Oil",
               "icon": "icons/opalescent-oil.png"
             },
-            {
-              "label": "Silver Oil",
-              "icon": "icons/silver-oil.png"
-            }
-          ]
-        },
-        {
-          "title": "Blight-Ravaged Maps",
-          "badges": [
             {
               "label": "Golden Oil",
               "icon": "icons/golden-oil.png"
@@ -1415,35 +1748,64 @@
       ]
     },
     {
-      "label": "Breach / Keepers",
-      "art": "breach-2.png",
-      "color": "breach",
-      "stages": [
-        {
-          "title": "Breaches"
-        },
-        {
-          "title": "Breachlords",
-          "badges": [
-            "Genesis Tree",
-            "Foulborn"
-          ]
-        }
-      ]
-    },
-    {
       "label": "Legion",
       "color": "legion",
+      "art": "legion.png",
+      "artSize": "140%",
+      "artPos": "calc(50% - 20px) -40px",
+      "headerArt": "legion-header.png",
       "stages": [
         {
-          "title": "Timeless Monoliths"
+          "title": "Timeless Monoliths",
+          "badges": [
+            {
+              "label": "Timeless Eternal Emblem",
+              "icon": "icons/timeless-eternal-emblem.png"
+            },
+            {
+              "label": "Timeless Karui Emblem",
+              "icon": "icons/timeless-karui-emblem.png"
+            },
+            {
+              "label": "Timeless Maraketh Emblem",
+              "icon": "icons/timeless-maraketh-emblem.png"
+            },
+            {
+              "label": "Timeless Templar Emblem",
+              "icon": "icons/timeless-templar-emblem.png"
+            },
+            {
+              "label": "Timeless Vaal Emblem",
+              "icon": "icons/timeless-vaal-emblem.png"
+            }
+          ]
         },
         {
           "title": "Timeless Conflict",
           "badges": [
             {
-              "label": "Timeless Jewels",
+              "label": "Glorious Vanity",
               "icon": "icons/glorious-vanity.png"
+            },
+            {
+              "label": "Militant Faith",
+              "icon": "icons/militant-faith.png"
+            },
+            {
+              "label": "Heroic Tragedy",
+              "icon": "icons/heroic-tragedy.png"
+            },
+            {
+              "label": "Elegant Hubris",
+              "icon": "icons/elegant-hubris.png"
+            },
+            {
+              "label": "Brutal Restraint",
+              "icon": "icons/brutal-restraint.png"
+            },
+            {
+              "label": "Lethal Pride",
+              "icon": "icons/lethal-pride.png"
             }
           ]
         }
@@ -1451,7 +1813,8 @@
     },
     {
       "label": "Ritual",
-      "art": "king-of-the-mists.png",
+      "headerArt": "ritual-header.png",
+      "art": "ritual.png",
       "color": "ritual",
       "stages": [
         {
@@ -1460,17 +1823,41 @@
             {
               "label": "Corpses",
               "icon": "icons/filled-coffin.png"
+            },
+            {
+              "label": "Archdemon Crown",
+              "icon": "icons/archdemon-crown.png"
+            },
+            {
+              "label": "Nameless Ring",
+              "icon": "icons/nameless-ring.png"
+            },
+            {
+              "label": "Omen of Fortune",
+              "icon": "icons/omen-of-fortune.png"
             }
           ]
         },
         {
-          "title": "The King in the Mists"
+          "title": "The King in the Mists",
+          "badges": [
+            {
+              "label": "The Light of Meaning",
+              "icon": "icons/the-light-of-meaning.png"
+            },
+            {
+              "label": "The Untouched Soul",
+              "icon": "icons/the-untouched-soul.png"
+            }
+          ]
         }
       ]
     },
     {
       "label": "Ultimatum",
       "color": "ultimatum",
+      "art": "ultimatum.png",
+      "headerArt": "ultimatum-header.png",
       "stages": [
         {
           "title": "Ultimatum encounters",
@@ -1480,13 +1867,31 @@
               "icon": "icons/tempering-catalyst.png"
             },
             {
-              "label": "Inscribed Ultimatums",
+              "label": "Inscribed Ultimatum",
               "icon": "icons/inscribed-ultimatum.png"
+            },
+            {
+              "label": "Temptation Step",
+              "icon": "icons/temptation-step.png"
             }
           ]
         },
         {
-          "title": "The Trialmaster"
+          "title": "The Trialmaster",
+          "badges": [
+            {
+              "label": "Tainted Catalyst",
+              "icon": "icons/tainted-catalyst.png"
+            },
+            {
+              "label": "Ixchel's Temptation",
+              "icon": "icons/ixchel-s-temptation.png"
+            },
+            {
+              "label": "Mahuxotl's Machination",
+              "icon": "icons/mahuxotl-s-machination.png"
+            }
+          ]
         }
       ]
     }
@@ -1646,6 +2051,7 @@
         img.src = `art/${mech.headerArt}`;
         img.alt = mech.label;
         if (mech.headerArtBlend) img.style.mixBlendMode = mech.headerArtBlend;
+        if (mech.headerArtScale) head.style.setProperty('--header-art-scale', mech.headerArtScale);
         head.appendChild(img);
       } else {
         head.textContent = mech.label;

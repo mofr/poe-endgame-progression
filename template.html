@@ -30,8 +30,8 @@
       --c-delve: #e8a33d;        --c2-delve: #4f8fd0;
       --c-heist: #c9a54f;        --c2-heist: #7d95b5;
       --c-expedition: #8fd0dd;   --c2-expedition: #b5804f;
-      --c-harvest: #58c08b;      --c2-harvest: #9a6fd0;
-      --c-betrayal: #6f74c9;     --c2-betrayal: #a84848;
+      --c-harvest: #5cb6e4;      --c2-harvest: #9a6fd0;
+      --c-betrayal: #c47a3a;     --c2-betrayal: #5f9aa8;
       --c-incursion: #3fa08c;    --c2-incursion: #cfa84f;
       --c-bestiary: #c98a4b;     --c2-bestiary: #b04040;
       --c-abyss: #57c793;        --c2-abyss: #46618a;
@@ -221,7 +221,7 @@
     }
 
     .section-title {
-      margin: 0 0 14px;
+      margin: 0 0 26px;
       font-size: 24px;
       letter-spacing: 0.12em;
       color: #ebdfbf;
@@ -240,6 +240,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      min-height: 500px;
       padding: 12px 8px 10px;
       border-radius: 18px;
       background: linear-gradient(180deg, rgba(18, 24, 33, 0.78), rgba(11, 15, 21, 0.78));
@@ -444,13 +445,19 @@
     .color-ultimatum { color: var(--c-ultimatum); --c2: var(--c2-ultimatum); }
 
     .pair-grid {
+      /* basis auto: keep content height, share only leftover space (2 gaps : 1 gap) */
+      flex: 2 1 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-bottom: 12px;
     }
-    .merge-box {
+    .pair-grid .chain {
       flex: 1;
+      justify-content: space-between;
+    }
+    .merge-box {
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
     }
@@ -469,7 +476,7 @@
       gap: 10px;
     }
 
-    .mechanics-section { position: relative; z-index: 1; margin-top: 12px; }
+    .mechanics-section { position: relative; z-index: 1; margin-top: 38px; }
     .mechanics-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -514,7 +521,7 @@
       padding: 0;
     }
     .mech-head img {
-      height: 48px;
+      height: calc(48px * var(--header-art-scale, 1));
       max-width: 100%;
       object-fit: contain;
     }
@@ -767,6 +774,7 @@
         img.src = `art/${mech.headerArt}`;
         img.alt = mech.label;
         if (mech.headerArtBlend) img.style.mixBlendMode = mech.headerArtBlend;
+        if (mech.headerArtScale) head.style.setProperty('--header-art-scale', mech.headerArtScale);
         head.appendChild(img);
       } else {
         head.textContent = mech.label;
