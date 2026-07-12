@@ -14,7 +14,8 @@
 layout:
   game_version: "3.28"
   poster_width: 2048
-  poster_min_height: 2700
+  # 2048 x 2560 is 4:5 — matches 16x20 in / 40x50 cm frames
+  poster_min_height: 2560
   crown_columns: 11
 content:
   bossCrown:
